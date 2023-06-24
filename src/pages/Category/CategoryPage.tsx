@@ -1,9 +1,27 @@
 import React from 'react';
+import Container from '../../components/Container/Container';
+import styles from './CategoryPage.module.css';
+import { useQuery } from '@tanstack/react-query';
+import { getCategories } from '../../api/categories';
+import RecipeCategoryItem from '../../components/CategoryItem/CategoryItem';
+import { CategoriesProps } from '../../types/categories';
 
-type Props = {};
+const RecipesPage = () => {
+  const { data: categories } = useQuery({
+    queryKey: ['categories'],
+    queryFn: getCategories,
+  });
 
-const CategoryPage = (props: Props) => {
-  return <div>CategoryPage</div>;
+  return (
+    <div>
+      <Container>
+        Labas
+        <div className={styles.categoriesWrapper}>
+          {categories && categories.map((category: CategoriesProps) => <RecipeCategoryItem key={category.id} {...category} />)}
+        </div>
+      </Container>
+    </div>
+  );
 };
 
-export default CategoryPage;
+export default RecipesPage;
