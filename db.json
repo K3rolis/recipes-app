@@ -1,0 +1,69 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "Param Baram",
+      "email": "go@mailinator.com",
+      "password": "test"
+    }
+  ],
+  "recipes": [
+    {
+      "id": 1,
+      "userId": 1,
+      "categoryId": 1,
+      "title": "labas",
+      "serves": 4,
+      "prepTime": 15,
+      "cookingTime": 20,
+      "description": "A simple but flavoursome meal even the fussiest of eaters will enjoy. Inspired by warming Indian flavours, you’ll be surprised by how quickly this delicious meal comes together! Perfect when served simply with rice, or step it up a notch and add a serving of warmed buttered naan.",
+      "ingredients": [
+        {
+          "name": "onion10",
+          "unit": "500g"
+        },
+        {
+          "name": "onion12",
+          "unit": "700g"
+        },
+        {
+          "name": "onion10",
+          "unit": 3
+        }
+      ],
+      "method": [
+        {
+          "description": "Heat a generous drizzle of oil in a large frying pan over medium heat. Sauté the onion, garlic and ginger for 3-4 minutes, or until the onion has softened."
+        },
+        {
+          "description": "Add the beef mince and cook for 6-8 minutes or until browned. "
+        },
+        {
+          "description": "Stir in the garam masala, chilli powder, ground cumin and turmeric and cook for a further few minutes, or until fragrant."
+        },
+        {
+          "description": "Pour in the beef stock and bring to a simmer. "
+        }
+      ]
+    }
+  ],
+
+  "categories": [
+    {
+      "id": 1,
+      "name": "Soup"
+    },
+    {
+      "id": 2,
+      "name": "Salad"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "userId": 1,
+      "description": "Ye ye ye it was very delicious",
+      "postedDate": "2022-02-02"
+    }
+  ]
+}
