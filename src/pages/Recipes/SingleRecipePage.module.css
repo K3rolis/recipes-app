@@ -1,0 +1,136 @@
+.recipeBrief {
+  display: flex;
+  margin-bottom: 40px;
+  margin-top: 80px;
+}
+
+.imgBox {
+  flex-shrink: 0;
+  -ms-flex-preferred-size: 40%;
+  flex-basis: 40%;
+}
+
+.imgBox img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px;
+  gap: 10px;
+}
+
+.title {
+  position: relative;
+  font-size: 4.5rem;
+  line-height: 1.2;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.title:after {
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  content: '';
+  width: 300px;
+  height: 2px;
+  background-color: black;
+}
+
+.metaItems {
+  display: flex;
+  gap: 10px;
+  font-size: 1.8rem;
+}
+.metaItem {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  height: 30px;
+  width: 30px;
+  margin-right: 5px;
+}
+
+.metaItemText {
+  font-weight: 700;
+  margin-right: 5px;
+}
+
+.metaItem .metaItemText:nth-child(3)::before {
+  content: '|';
+}
+
+.description {
+  font-size: 2rem;
+  color: var(--primary-text-color);
+  line-height: 1.4;
+}
+
+.categoryButton {
+  border: 1px solid var(--secondary-text-color);
+  background-color: white;
+  font-size: 1.4rem;
+  color: black;
+  padding: 3px;
+  cursor: pointer;
+}
+
+/* SIDEBAR */
+
+.instructionsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background-color: white;
+  padding-bottom: 30px;
+}
+
+.sidebar {
+  padding: 0 25px;
+}
+.methods {
+  grid-column: 2/4;
+}
+
+.instructionsTitle {
+  text-align: center;
+  margin-block: 20px;
+  font-size: 3rem;
+  font-weight: 800;
+  color: black;
+}
+
+.recipeIngredient {
+  /* text-decoration: none; */
+  padding: 10px 15px;
+  list-style: none;
+  font-size: 1.8rem;
+  background-color: #f3f2f0;
+}
+
+.recipeIngredient:nth-child(2n) {
+  background-color: white;
+}
+
+/* INSTRUCTIONS */
+
+.instructions {
+  padding-inline: 25px;
+}
+
+.method {
+  /* list-style: none; */
+  font-family: sans-serif serif;
+  font-size: 1.9rem;
+  line-height: 1.5;
+  padding-bottom: 20px;
+  justify-content: start;
+}
+.method:last-child {
+  padding: 0;
+}

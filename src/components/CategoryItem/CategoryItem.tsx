@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const RecipeCategoryItem = (props: CategoriesProps) => {
   return (
-    <Link to={`/recipes/${props.id}`}>
+    <Link to={`/recipes/category/${props.id}`}>
       <div className={styles.categoryItem}>
         <img src={props.imageUrl} alt={props.name} />
         <div className={styles.contentBox}>

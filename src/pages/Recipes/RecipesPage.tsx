@@ -25,35 +25,8 @@ const RecipePage = (props: Props) => {
       <Container>
         <div className={styles.itemsWrapper}>
           {recipes.recipes.map((recipe: CategoryRecipesProps) => (
-            <RecipeItem key={recipe.id} {...recipe} category={recipes.name} />
+            <RecipeItem key={recipe.id} {...recipe} categoryName={recipes.name} />
           ))}
-          {/* <div className={styles.item}>
-            <div className={styles.imgBox}>
-              <img src="https://www.countdown.co.nz/Content/Recipes/219268_Winter%20Recipes%20Tiles_Tomato_Chickpea_Soup_810x520.jpg" alt="" />
-            </div>
-            <div className={styles.itemContent}>
-              <div className={styles.category}> Dinner</div>
-              <p className={styles.title}> Kazkoks troskinys</p>
-
-              <div className={styles.innerContainer}>
-                <div className={styles.additionalInfo}>
-                  <div className={styles.innerTitle}>Prep & Cook Time</div>
-                  <div className={styles.innerBox}>
-                    <PiCookingPot className={styles.icon} /> <span className={styles.innerContent}>15 min + 30 min</span>
-                  </div>
-                </div>
-
-                <div className={styles.additionalInfo}>
-                  <div className={styles.innerTitle}>Servings</div>
-                  <div className={styles.innerBox}>
-                    <BiDish className={styles.icon} /> <span className={styles.innerContent}>6</span>
-                  </div>
-                </div>
-              </div>
-
-              <p className={styles.category}></p>
-            </div>
-          </div> */}
         </div>
       </Container>
     </div>

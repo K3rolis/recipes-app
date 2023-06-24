@@ -39,10 +39,16 @@ const Navigation = () => {
           Recipes
         </NavLink>
 
-        <input type="search" />
-
         <NavLink className={({ isActive }) => (isActive ? styles.active : 'active')} to="/categories/">
           Categories
+        </NavLink>
+
+        <NavLink className={({ isActive }) => (isActive ? styles.active : 'active')} to="/login/">
+          Login
+        </NavLink>
+
+        <NavLink className={({ isActive }) => (isActive ? styles.active : 'active')} to="/register/">
+          Register
         </NavLink>
 
         {/* 

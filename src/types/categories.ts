@@ -7,7 +7,8 @@ export type CategoriesProps = {
 
 export type CategoryRecipesProps = {
   id?: number;
-  category: string;
+  categoryId: number;
+  categoryName: string;
   title: string;
   prepTime: number;
   cookingTime: number;

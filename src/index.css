@@ -13,6 +13,7 @@ html {
 }
 
 body {
+  background-color: #f6f6f6;
   margin: 0;
   font-family: 'Open Sans', sans-serif, Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
