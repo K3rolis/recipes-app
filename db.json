@@ -59,16 +59,13 @@
       "description": "A simple but flavoursome meal even the fussiest of eaters will enjoy. Inspired by warming Indian flavours, you’ll be surprised by how quickly this delicious meal comes together! Perfect when served simply with rice, or step it up a notch and add a serving of warmed buttered naan.",
       "ingredients": [
         {
-          "name": "onion10",
-          "unit": "500g"
+          "name": "onion10"
         },
         {
-          "name": "onion12",
-          "unit": "700g"
+          "name": "onion12"
         },
         {
-          "name": "onion10",
-          "unit": 3
+          "name": "onion10"
         }
       ],
       "method": [

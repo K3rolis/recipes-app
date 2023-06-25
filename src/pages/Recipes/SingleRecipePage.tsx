@@ -3,6 +3,12 @@ import styles from './SingleRecipePage.module.css';
 import Container from '../../components/Container/Container';
 import { LuClock5 } from 'react-icons/lu';
 import { BiDish } from 'react-icons/bi';
+import Button from '@mui/material/Button/Button';
+
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import TextareaAutosize from '@mui/base/TextareaAutosize';
+import CommentForm from '../../components/Forms/Comment/CommentForm';
 
 type Props = {};
 
@@ -82,6 +88,61 @@ const SingleRecipePage = (props: Props) => {
               </ol>
             </div>
           </div>
+        </div>
+
+        <h2>Comments</h2>
+        <div className={styles.commentBox}>
+          <div className={styles.commentHeader}>
+            <div className={styles.metaData}>
+              <div className={styles.name}>Name</div>
+              <div className={styles.date}>2022-02-22</div>
+            </div>
+            <div className={styles.buttons}>
+              <Button variant="contained">Edit</Button>
+              <Button variant="outlined">Delete</Button>
+            </div>
+          </div>
+          <div className={styles.commentBody}>
+            body body body body body body body body body body body body body body body body body body body body body body body body body body body body body
+            body body body body body body body body body body body body body{' '}
+          </div>
+          <hr />
+        </div>
+
+        <div className={styles.commentBox}>
+          <div className={styles.commentHeader}>
+            <div className={styles.metaData}>
+              <div className={styles.name}>Name</div>
+              <div className={styles.date}>2022-02-22</div>
+            </div>
+            <div className={styles.buttons}>
+              <Button variant="contained">Edit</Button>
+              <Button variant="outlined">Delete</Button>
+            </div>
+          </div>
+          <div className={styles.commentBody}>
+            body body body body body body body body body body body body body body body body body body body body body body body body body body body body body
+            body body body body body body body body body body body body body{' '}
+          </div>
+          <hr />
+        </div>
+
+        <div className={styles.commentBox}>
+          <div className={styles.commentHeader}>
+            <div className={styles.metaData}>
+              <div className={styles.name}>Name</div>
+              <div className={styles.date}>2022-02-22</div>
+            </div>
+            <div className={styles.buttons}>
+              <Button variant="contained">Edit</Button>
+              <Button variant="outlined">Delete</Button>
+            </div>
+          </div>
+          <div className={styles.commentBody}>
+            body body body body body body body body body body body body body body body body body body body body body body body body body body body body body
+            body body body body body body body body body body body body body{' '}
+          </div>
+          <hr />
         </div>
       </Container>
     </div>

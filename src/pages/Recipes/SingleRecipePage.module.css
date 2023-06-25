@@ -25,7 +25,7 @@
 
 .title {
   position: relative;
-  font-size: 4.5rem;
+  font-size: 3rem;
   line-height: 1.2;
   font-weight: 700;
   margin-bottom: 10px;
@@ -44,7 +44,7 @@
 .metaItems {
   display: flex;
   gap: 10px;
-  font-size: 1.8rem;
+  font-size: 1.1rem;
 }
 .metaItem {
   display: flex;
@@ -67,7 +67,7 @@
 }
 
 .description {
-  font-size: 2rem;
+  font-size: 1.3rem;
   color: var(--primary-text-color);
   line-height: 1.4;
 }
@@ -75,7 +75,6 @@
 .categoryButton {
   border: 1px solid var(--secondary-text-color);
   background-color: white;
-  font-size: 1.4rem;
   color: black;
   padding: 3px;
   cursor: pointer;
@@ -100,7 +99,7 @@
 .instructionsTitle {
   text-align: center;
   margin-block: 20px;
-  font-size: 3rem;
+  font-size: 2.2rem;
   font-weight: 800;
   color: black;
 }
@@ -109,7 +108,7 @@
   /* text-decoration: none; */
   padding: 10px 15px;
   list-style: none;
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   background-color: #f3f2f0;
 }
 
@@ -126,11 +125,42 @@
 .method {
   /* list-style: none; */
   font-family: sans-serif serif;
-  font-size: 1.9rem;
+  font-size: 1.2rem;
   line-height: 1.5;
   padding-bottom: 20px;
   justify-content: start;
 }
 .method:last-child {
   padding: 0;
+}
+
+/* Comments */
+
+.commentBox {
+  /* background-color: red; */
+  font-size: 1.3rem;
+  padding: 15px 25px;
+}
+
+.commentHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.name {
+  color: var(--primary-text-color);
+}
+
+.date {
+  color: var(--secondary-text-color);
+}
+
+.commentBody {
+  color: var(--primary-text-color);
+  font-size: 1.3rem;
+}
+
+.metaData {
+  display: flex;
+  gap: 30px;
 }
