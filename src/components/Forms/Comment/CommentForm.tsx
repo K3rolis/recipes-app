@@ -13,8 +13,12 @@ const CommentForm = (props: Props) => {
     postedDate: '',
   });
 
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <Box
         component="div"
         sx={{
