@@ -1,8 +1,7 @@
 export type CategoriesProps = {
-  id?: number;
+  id?: any;
   name: string;
   imageUrl: string;
-  slug: string;
 };
 
 export type CategoryRecipesProps = {

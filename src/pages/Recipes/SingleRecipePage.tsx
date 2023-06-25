@@ -5,11 +5,6 @@ import { LuClock5 } from 'react-icons/lu';
 import { BiDish } from 'react-icons/bi';
 import Button from '@mui/material/Button/Button';
 
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import TextareaAutosize from '@mui/base/TextareaAutosize';
-import CommentForm from '../../components/Forms/Comment/CommentForm';
-
 type Props = {};
 
 const SingleRecipePage = (props: Props) => {
