@@ -1,14 +1,65 @@
-import React from 'react';
+import { useContext, useState } from 'react';
 import styles from './SingleRecipePage.module.css';
 import Container from '../../components/Container/Container';
 import { LuClock5 } from 'react-icons/lu';
 import { BiDish } from 'react-icons/bi';
-import Button from '@mui/material/Button/Button';
 import CommentForm from '../../components/Forms/Comment/CommentForm';
+import { LoginContext } from '../../components/Contexts/LoginContext';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { createComment, deleteComment, getComments, updateComment } from '../../api/comments';
+import { useParams } from 'react-router-dom';
+import CommentItem from '../../components/CommentItem/CommentItem';
 
-type Props = {};
+const SingleRecipePage = () => {
+  const { isLoggedIn, authUser } = useContext(LoginContext);
+  const { recipeId } = useParams();
+  const [openComment, setOpenComment] = useState<boolean>(false);
+  const [editForm, setEditForm] = useState<any | null>(null);
 
-const SingleRecipePage = (props: Props) => {
+  const {
+    refetch,
+    isLoading,
+    data: comments,
+  } = useQuery({
+    queryKey: ['comments', Number(recipeId)],
+    queryFn: () => getComments(Number(recipeId)),
+  });
+
+  const createCommentMutation = useMutation({
+    mutationFn: createComment,
+    onSuccess: () => refetch(),
+  });
+
+  const deleteCommentMutation = useMutation({
+    mutationFn: deleteComment,
+    onSuccess: () => refetch(),
+  });
+
+  const updateCommentMutation = useMutation({
+    mutationFn: updateComment,
+    onSuccess: () => refetch(),
+  });
+
+  const handleNewComment = (comment: any) => {
+    if (editForm) {
+      updateCommentMutation.mutate({ id: editForm.id, ...comment });
+    } else {
+      createCommentMutation.mutate(comment);
+    }
+    setOpenComment(false);
+    setEditForm(null);
+  };
+
+  const handleEdit = (comment: any) => {
+    setEditForm(comment);
+  };
+
+  const handleDelete = (id: any) => {
+    deleteCommentMutation.mutate(id);
+  };
+
+  if (isLoading) return <h1>Loading...</h1>;
+
   return (
     <div>
       <Container>
@@ -86,63 +137,31 @@ const SingleRecipePage = (props: Props) => {
           </div>
         </div>
 
-        <h2>Comments</h2>
+        <h2>Comments {`(${comments.length})`}</h2>
 
-        <CommentForm />
+        {isLoggedIn && (
+          <button
+            onClick={() => {
+              setOpenComment(!openComment);
+            }}
+          >
+            New Comment
+          </button>
+        )}
 
-        <div className={styles.commentBox}>
-          <div className={styles.commentHeader}>
-            <div className={styles.metaData}>
-              <div className={styles.name}>Name</div>
-              <div className={styles.date}>2022-02-22</div>
-            </div>
-            <div className={styles.buttons}>
-              <Button variant="contained">Edit</Button>
-              <Button variant="outlined">Delete</Button>
-            </div>
-          </div>
-          <div className={styles.commentBody}>
-            body body body body body body body body body body body body body body body body body body body body body body body body body body body body body
-            body body body body body body body body body body body body body{' '}
-          </div>
-          <hr />
-        </div>
-
-        <div className={styles.commentBox}>
-          <div className={styles.commentHeader}>
-            <div className={styles.metaData}>
-              <div className={styles.name}>Name</div>
-              <div className={styles.date}>2022-02-22</div>
-            </div>
-            <div className={styles.buttons}>
-              <Button variant="contained">Edit</Button>
-              <Button variant="outlined">Delete</Button>
-            </div>
-          </div>
-          <div className={styles.commentBody}>
-            body body body body body body body body body body body body body body body body body body body body body body body body body body body body body
-            body body body body body body body body body body body body body{' '}
-          </div>
-          <hr />
-        </div>
-
-        <div className={styles.commentBox}>
-          <div className={styles.commentHeader}>
-            <div className={styles.metaData}>
-              <div className={styles.name}>Name</div>
-              <div className={styles.date}>2022-02-22</div>
-            </div>
-            <div className={styles.buttons}>
-              <Button variant="contained">Edit</Button>
-              <Button variant="outlined">Delete</Button>
-            </div>
-          </div>
-          <div className={styles.commentBody}>
-            body body body body body body body body body body body body body body body body body body body body body body body body body body body body body
-            body body body body body body body body body body body body body{' '}
-          </div>
-          <hr />
-        </div>
+        {isLoggedIn && openComment && <CommentForm onSubmit={handleNewComment} initialValue={{}} />}
+        {comments?.map((comment: any) => (
+          <>
+            <CommentItem
+              {...comment}
+              userName={comment.user.username}
+              showActions={comment.userId === authUser.id || false}
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
+            />
+            {isLoggedIn && editForm?.id === comment.id && <CommentForm onSubmit={handleNewComment} initialValue={editForm} />}
+          </>
+        ))}
       </Container>
     </div>
   );

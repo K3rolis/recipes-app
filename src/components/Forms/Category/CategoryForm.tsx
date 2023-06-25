@@ -18,8 +18,6 @@ const CategoryForm = ({ onSubmit, initialValue, title, submit }: Props) => {
     imageUrl: initialValue.imageUrl || '',
   });
 
-  console.log(initialValue);
-
   const handleChangeInput = (e: any) => {
     setCategories({
       ...category,
@@ -30,7 +28,6 @@ const CategoryForm = ({ onSubmit, initialValue, title, submit }: Props) => {
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     onSubmit(category);
-    console.log(category);
 
     setCategories({
       name: '',
@@ -49,16 +46,6 @@ const CategoryForm = ({ onSubmit, initialValue, title, submit }: Props) => {
               '& > :not(style)': { width: '100%' },
             }}
           >
-            <TextField
-              id="category"
-              label="title"
-              name="name"
-              variant="outlined"
-              margin="normal"
-              size="small"
-              value={category.name}
-              onChange={handleChangeInput}
-            />
             <TextField
               id="imageUrl"
               label="imageUrl"

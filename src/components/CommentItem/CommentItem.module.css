@@ -1,0 +1,29 @@
+.commentBox {
+  /* background-color: red; */
+  font-size: 1.3rem;
+  padding: 15px 25px;
+}
+
+.commentHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.name {
+  color: var(--primary-text-color);
+  font-weight: 700;
+}
+
+.date {
+  color: var(--secondary-text-color);
+}
+
+.commentBody {
+  color: var(--primary-text-color);
+  font-size: 1.3rem;
+}
+
+.metaData {
+  display: flex;
+  gap: 30px;
+}

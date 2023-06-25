@@ -63,7 +63,7 @@
       "id": 2,
       "userId": 1,
       "categoryId": 1,
-      "title": "labas",
+      "title": "labasa",
       "imageUrl": "https://www.countdown.co.nz/Content/Recipes/219268_Winter%20Recipes%20Tiles_Tomato_Chickpea_Soup_810x520.jpg",
       "servings": 4,
       "prepTime": 15,
@@ -172,7 +172,36 @@
       "id": 1,
       "userId": 1,
       "description": "Ye ye ye it was very delicious",
-      "postedDate": "2022-02-02"
+      "postedDate": "2022-02-02",
+      "recipeId": 1
+    },
+    {
+      "userId": 2,
+      "description": "Ye ye ye it was very deliciouss",
+      "postedDate": "2023-6-26",
+      "recipeId": 2,
+      "id": 2
+    },
+    {
+      "userId": 2,
+      "description": "Ye ye ye it was very deliciousssss",
+      "postedDate": "2023-6-26",
+      "recipeId": 2,
+      "id": 3
+    },
+    {
+      "userId": 2,
+      "description": "Ye ye ye it was very delicioussssssss",
+      "postedDate": "2023-6-26",
+      "recipeId": 2,
+      "id": 4
+    },
+    {
+      "userId": 2,
+      "description": "asdasdas",
+      "postedDate": "2023-6-26",
+      "recipeId": 2,
+      "id": 7
     }
   ]
 }

@@ -1,33 +1,64 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { LoginContext } from '../../Contexts/LoginContext';
+import { useParams } from 'react-router-dom';
 
-type Props = {};
+const CommentForm = ({ onSubmit, initialValue }: any) => {
+  const { authUser } = useContext(LoginContext);
+  const today = new Date();
+  const date = (today: Date) => {
+    return today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  };
 
-const CommentForm = (props: Props) => {
+  const { recipeId } = useParams();
+
   const [comment, setComment] = useState({
-    userId: '',
-    description: '',
-    postedDate: '',
+    userId: authUser.id,
+    description: initialValue.description || '',
+    postedDate: date(today),
+    recipeId: Number(recipeId),
   });
+
+  const changeInputValue = (e: any) => {
+    setComment({
+      ...comment,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    onSubmit(comment);
+
+    setComment({
+      ...comment,
+      description: '',
+    });
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <Box
-        component="div"
         sx={{
           '& > :not(style)': { width: '100%' },
         }}
       >
-        <TextField id="username" label="Full Name" variant="outlined" margin="dense" size="small" />
-        <TextField id="body" name="description" label="Comment" multiline maxRows={4} placeholder="Comment..." />
-        <Button variant="contained">Create</Button>
+        <TextField
+          id="body"
+          name="description"
+          value={comment.description}
+          onChange={changeInputValue}
+          label="Comment"
+          multiline
+          maxRows={10}
+          placeholder="Comment..."
+        />
+        <Button variant="contained" type="submit">
+          Create
+        </Button>
       </Box>
     </form>
   );
