@@ -3,17 +3,16 @@ import { Routes, Route } from 'react-router-dom';
 import HomePage from './pages/Home/HomePage';
 import CategoryPage from './pages/Category/CategoryPage';
 import LoginPage from './pages/User/LoginPage';
-import RegisterPage from './pages/User/RegisterPage';
 import Header from './components/Header/Header';
 import RecipesPage from './pages/Recipes/RecipesPage';
 import SingleRecipePage from './pages/Recipes/SingleRecipePage';
 import CategoriesPage from './pages/Category/CategoriesPage';
 import RecipeForm from './components/Forms/Recipe/RecipeForm';
+import RegisterPage from './pages/User/RegisterPage';
 
 function App() {
   return (
     <div className="App">
-      labas
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />

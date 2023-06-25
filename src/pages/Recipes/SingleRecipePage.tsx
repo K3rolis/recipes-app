@@ -4,6 +4,7 @@ import Container from '../../components/Container/Container';
 import { LuClock5 } from 'react-icons/lu';
 import { BiDish } from 'react-icons/bi';
 import Button from '@mui/material/Button/Button';
+import CommentForm from '../../components/Forms/Comment/CommentForm';
 
 type Props = {};
 
@@ -86,6 +87,9 @@ const SingleRecipePage = (props: Props) => {
         </div>
 
         <h2>Comments</h2>
+
+        <CommentForm />
+
         <div className={styles.commentBox}>
           <div className={styles.commentHeader}>
             <div className={styles.metaData}>
