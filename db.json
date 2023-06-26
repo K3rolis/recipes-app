@@ -21,30 +21,26 @@
   ],
   "recipes": [
     {
-      "id": 1,
-      "userId": 1,
-      "categoryId": 1,
-      "title": "labas",
+      "userId": 2,
+      "categoryId": 2,
+      "title": "Cheese and thyme soda bread ",
       "imageUrl": "https://www.countdown.co.nz/Content/Recipes/219268_Winter%20Recipes%20Tiles_Tomato_Chickpea_Soup_810x520.jpg",
       "servings": 4,
       "prepTime": 15,
       "cookingTime": 20,
-      "description": "A simple but flavoursome meal even the fussiest of eaters will enjoy. Inspired by warming Indian flavours, you’ll be surprised by how quickly this delicious meal comes together! Perfect when served simply with rice, or step it up a notch and add a serving of warmed buttered naan.",
+      "description": "Cover this cheese and thyme soda bread in butter or dunk it in your favourite stew or soup for a wonderful time. As an Irish-style bread, its madewithout any yeast and is incredibly versatile",
       "ingredients": [
         {
-          "name": "onion10",
-          "unit": "500g"
+          "name": "onion10"
         },
         {
-          "name": "onion12",
-          "unit": "700g"
+          "name": "onion12"
         },
         {
-          "name": "onion10",
-          "unit": 3
+          "name": "onion10"
         }
       ],
-      "method": [
+      "methods": [
         {
           "description": "Heat a generous drizzle of oil in a large frying pan over medium heat. Sauté the onion, garlic and ginger for 3-4 minutes, or until the onion has softened."
         },
@@ -57,12 +53,13 @@
         {
           "description": "Pour in the beef stock and bring to a simmer. "
         }
-      ]
+      ],
+      "id": 1
     },
     {
       "id": 2,
       "userId": 1,
-      "categoryId": 1,
+      "categoryId": 2,
       "title": "labasa",
       "imageUrl": "https://www.countdown.co.nz/Content/Recipes/219268_Winter%20Recipes%20Tiles_Tomato_Chickpea_Soup_810x520.jpg",
       "servings": 4,
@@ -80,7 +77,7 @@
           "name": "onion10"
         }
       ],
-      "method": [
+      "methods": [
         {
           "description": "Heat a generous drizzle of oil in a large frying pan over medium heat. Sauté the onion, garlic and ginger for 3-4 minutes, or until the onion has softened."
         },
@@ -107,19 +104,16 @@
       "description": "A simple but flavoursome meal even the fussiest of eaters will enjoy. Inspired by warming Indian flavours, you’ll be surprised by how quickly this delicious meal comes together! Perfect when served simply with rice, or step it up a notch and add a serving of warmed buttered naan.",
       "ingredients": [
         {
-          "name": "onion10",
-          "unit": "500g"
+          "name": "onion 500g"
         },
         {
-          "name": "onion12",
-          "unit": "700g"
+          "name": "onion 200g"
         },
         {
-          "name": "onion10",
-          "unit": 3
+          "name": "o asdnion10"
         }
       ],
-      "method": [
+      "methods": [
         {
           "description": "Heat a generous drizzle of oil in a large frying pan over medium heat. Sauté the onion, garlic and ginger for 3-4 minutes, or until the onion has softened."
         },
@@ -155,16 +149,6 @@
       "id": 4,
       "name": "SoSups",
       "imageUrl": "https://www.countdown.co.nz/content/f23-june-budget-friendly.jpg"
-    },
-    {
-      "name": "asd",
-      "imageUrl": "asd",
-      "id": 5
-    },
-    {
-      "name": "te",
-      "imageUrl": "asd",
-      "id": 6
     }
   ],
   "comments": [
@@ -177,7 +161,7 @@
     },
     {
       "userId": 2,
-      "description": "Ye ye ye it was very deliciouss",
+      "description": "Ye ye ye it was very deliciousss",
       "postedDate": "2023-6-26",
       "recipeId": 2,
       "id": 2
