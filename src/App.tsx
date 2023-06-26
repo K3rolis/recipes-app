@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import { LoginContext } from './components/Contexts/LoginContext';
 import HomePage from './pages/Home/HomePage';
 import CategoryPage from './pages/Category/CategoryPage';
 import LoginPage from './pages/User/LoginPage';
@@ -8,13 +10,11 @@ import RecipesPage from './pages/Recipes/RecipesPage';
 import SingleRecipePage from './pages/Recipes/SingleRecipePage';
 import CategoriesPage from './pages/Category/CategoriesPage';
 import RegisterPage from './pages/User/RegisterPage';
-import { LoginContext } from './components/Contexts/LoginContext';
 import RecipeEdit from './components/Forms/Recipe/RecipeEdit';
 import RecipeCreate from './components/Forms/Recipe/RecipeCreate';
 import EditUserPage from './pages/User/EditUserPage';
 import Footer from './components/Footer/Footer';
-
-
+import NotFound from './components/Errors/NotFound';
 
 function App() {
   const [authUser, setAuthUser] = useState<any | null>({
@@ -43,9 +43,12 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/user/edit/:userId" element={<EditUserPage />} />
+
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
       </LoginContext.Provider>
+      <ToastContainer />
     </div>
   );
 }

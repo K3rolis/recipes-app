@@ -6,6 +6,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { deleteRecipe } from '../../api/recipes';
 import Button from 'react-bootstrap/Button';
+import { toast } from 'react-toastify';
+import { PropagateLoader } from 'react-spinners';
 
 type Props = {
   id?: number;
@@ -26,8 +28,14 @@ const SingleRecipe = (props: Props) => {
   const navigate = useNavigate();
   const deleteRecipeMutation = useMutation({
     mutationFn: deleteRecipe,
-    onSuccess: () => navigate(`/recipes/category/${props.id}`),
+    onSuccess: () => {
+      toast.success('Recipe was deleted.');
+      navigate(`/recipes/category/${props.id}`);
+    },
+    onError: () => navigate(`/notFound`),
   });
+
+  if (deleteRecipeMutation.isLoading) return <PropagateLoader className="loader" color="#36d7b7" />;
 
   return (
     <div className={styles.recipeContainer}>

@@ -5,16 +5,15 @@ import { CategoryRecipesProps } from '../../types/categories';
 import RecipeItem from '../../components/RecipeItem/RecipeItem';
 import { useQuery } from '@tanstack/react-query';
 import { getRecipes } from '../../api/recipes';
+import { PropagateLoader } from 'react-spinners';
 
-type Props = {};
-
-const HomePage = (props: Props) => {
+const HomePage = () => {
   const { isLoading, data: recipes } = useQuery({
     queryKey: ['recipes'],
     queryFn: () => getRecipes(),
   });
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <PropagateLoader className="loader" color="#36d7b7" />;
   return (
     <div className={styles.container}>
       <div className={styles.heroBanner}>

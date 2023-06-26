@@ -9,6 +9,7 @@ import CommentItem from '../../components/CommentItem/CommentItem';
 import { getRecipe } from '../../api/recipes';
 import SingleRecipe from '../../components/SingleRecipe/SingleRecipe';
 import Button from 'react-bootstrap/Button';
+import { PropagateLoader } from 'react-spinners';
 
 const SingleRecipePage = () => {
   const { isLoggedIn, authUser } = useContext(LoginContext);
@@ -64,7 +65,7 @@ const SingleRecipePage = () => {
     deleteCommentMutation.mutate(id);
   };
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <PropagateLoader className="loader" color="#36d7b7" />;
 
   return (
     <div>

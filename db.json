@@ -149,9 +149,9 @@
   ],
   "categories": [
     {
-      "id": 1,
       "name": "Soups",
-      "imageUrl": "https://www.countdown.co.nz/content/f23-june-budget-friendly.jpg"
+      "imageUrl": "https://www.countdown.co.nz/content/f23-june-budget-friendly.jpg",
+      "id": 1
     },
     {
       "id": 2,
@@ -167,6 +167,11 @@
       "id": 4,
       "name": "SoSups",
       "imageUrl": "https://www.countdown.co.nz/content/f23-june-budget-friendly.jpg"
+    },
+    {
+      "name": "a",
+      "imageUrl": "baaa",
+      "id": 5
     }
   ],
   "comments": [
@@ -204,13 +209,6 @@
       "postedDate": "2023-6-26",
       "recipeId": 2,
       "id": 7
-    },
-    {
-      "userId": 2,
-      "description": "testasd",
-      "postedDate": "2023-6-26",
-      "recipeId": 3,
-      "id": 8
     }
   ]
 }

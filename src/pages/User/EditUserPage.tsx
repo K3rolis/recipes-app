@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { getUser, updateUser } from '../../api/users';
 import Container from '../../components/Container/Container';
 import { LoginContext } from '../../components/Contexts/LoginContext';
+import { PropagateLoader } from 'react-spinners';
 
 type Props = {};
 
@@ -32,7 +33,7 @@ const EditUserPage = (props: Props) => {
     }
   };
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <PropagateLoader className="loader" color="#36d7b7" />;
 
   return <EditUserForm onSubmit={handleSubmit} initialValue={user} />;
 };

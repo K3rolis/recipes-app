@@ -9,8 +9,6 @@ import Dropdown from 'react-bootstrap/Dropdown';
 const Navigation = () => {
   const { isLoggedIn, setIsLoggedIn, authUser } = useContext(LoginContext);
 
-  console.log(isLoggedIn);
-
   const handleLogout = () => {
     setIsLoggedIn(false);
   };

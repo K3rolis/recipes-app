@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useQuery } from '@tanstack/react-query';
 import { getUsers } from '../../../api/users';
+import { PropagateLoader } from 'react-spinners';
 
 const LoginForm = ({ onSubmit }: any) => {
   const [user, setUser] = useState({
@@ -19,7 +20,7 @@ const LoginForm = ({ onSubmit }: any) => {
     queryFn: getUsers,
   });
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <PropagateLoader className="loader" color="#36d7b7" />;
 
   const handleSubmit = (e: any) => {
     e.preventDefault();

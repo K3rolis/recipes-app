@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { getRecipesByCategory } from '../../api/categories';
 import { CategoryRecipesProps } from '../../types/categories';
+import { PropagateLoader } from 'react-spinners';
 
 type Props = {};
 
@@ -17,7 +18,7 @@ const RecipePage = (props: Props) => {
     queryFn: () => getRecipesByCategory(Number(categoryId)),
   });
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <PropagateLoader className="loader" color="#36d7b7" />;
 
   return (
     <div>

@@ -15,6 +15,8 @@ import CategoryForm from '../../components/Forms/Category/CategoryForm';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { createCategory, deleteCategory, getCategories, updateCategory } from '../../api/categories';
 import { CategoriesProps } from '../../types/categories';
+import { PropagateLoader } from 'react-spinners';
+import { toast } from 'react-toastify';
 
 const CategoriesPage = () => {
   const [isCreate, setIsCreate] = useState(false);
@@ -31,17 +33,26 @@ const CategoriesPage = () => {
 
   const deleteCategoryMutation = useMutation({
     mutationFn: deleteCategory,
-    onSuccess: () => refetch(),
+    onSuccess: () => {
+      toast.success('Category was deleted successfully!');
+      refetch();
+    },
   });
 
   const createCategoryMutation = useMutation({
     mutationFn: createCategory,
-    onSuccess: () => refetch(),
+    onSuccess: () => {
+      toast.success('Category was created successfully!');
+      refetch();
+    },
   });
 
   const updateCategoryMutation = useMutation({
     mutationFn: updateCategory,
-    onSuccess: () => refetch(),
+    onSuccess: () => {
+      toast.success('Category was updated successfully!');
+      refetch();
+    },
   });
 
   const handleSubmit = (category: any) => {
@@ -55,9 +66,12 @@ const CategoriesPage = () => {
         ...category,
       });
     }
+    setEditForm(null);
   };
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading || updateCategoryMutation.isLoading || createCategoryMutation.isLoading || updateCategoryMutation.isLoading) {
+    return <PropagateLoader className="loader" color="#36d7b7" />;
+  }
 
   return (
     <div>

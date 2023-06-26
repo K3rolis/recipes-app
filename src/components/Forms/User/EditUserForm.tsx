@@ -7,7 +7,8 @@ import TextField from '@mui/material/TextField';
 import Button from 'react-bootstrap/Button';
 import { useMutation } from '@tanstack/react-query';
 import { deleteUser } from '../../../api/users';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const EditUserForm = ({ onSubmit, initialValue }: any) => {
   const [user, setUser] = useState<any>({
@@ -15,6 +16,8 @@ const EditUserForm = ({ onSubmit, initialValue }: any) => {
     password: '',
     confirmPassword: '',
   });
+
+  const navigate = useNavigate();
   const { userId } = useParams();
 
   const handleChangeInput = (e: any) => {
@@ -26,6 +29,10 @@ const EditUserForm = ({ onSubmit, initialValue }: any) => {
 
   const deleteUserMutation = useMutation({
     mutationFn: deleteUser,
+    onSuccess: () => {
+      toast.success('Your Account Was  Deleted.');
+      navigate(`/`);
+    },
   });
 
   const handleSubmit = (e: { preventDefault: () => void }) => {

@@ -3,8 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { LoginContext } from '../../Contexts/LoginContext';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { createRecipe } from '../../../api/recipes';
+import { useQuery } from '@tanstack/react-query';
 import { getCategories } from '../../../api/categories';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
@@ -12,6 +11,7 @@ import { CreateRecipesProps } from '../../../types/recipes';
 import Container from '../../Container/Container';
 import { FormControl, Grid, InputLabel } from '@mui/material';
 import styles from './RecipeForm.module.css';
+import { PropagateLoader } from 'react-spinners';
 
 const RecipeForm = ({ onSubmit, initialValue }: any) => {
   const { authUser } = useContext(LoginContext);
@@ -35,7 +35,7 @@ const RecipeForm = ({ onSubmit, initialValue }: any) => {
     });
   };
 
-  const handleIngredientsInput = (index: any, e: any) => {
+  const handleIngredientsInput = (index: number, e: any) => {
     const { name, value } = e.target;
     const list = [...recipe.ingredients];
     list[index][name] = value;
@@ -80,7 +80,7 @@ const RecipeForm = ({ onSubmit, initialValue }: any) => {
     onSubmit(recipe);
   };
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <PropagateLoader className="loader" color="#36d7b7" />;
 
   return (
     <Container className={styles.formContainer}>
