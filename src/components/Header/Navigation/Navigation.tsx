@@ -5,12 +5,12 @@ import Container from '../../Container/Container';
 import { LoginContext } from '../../Contexts/LoginContext';
 
 const Navigation = () => {
-  const context = useContext(LoginContext);
+  const { isLoggedIn, setIsLoggedIn, authUser } = useContext(LoginContext);
 
-  console.log(context.isLoggedIn);
+  console.log(isLoggedIn);
 
   const handleLogout = () => {
-    context.setIsLoggedIn(false);
+    setIsLoggedIn(false);
   };
 
   return (
@@ -27,7 +27,7 @@ const Navigation = () => {
           Categories
         </NavLink>
 
-        {!context.isLoggedIn ? (
+        {!isLoggedIn ? (
           <>
             <NavLink className={({ isActive }) => (isActive ? styles.active : 'active')} to="/login/">
               Login
@@ -40,7 +40,10 @@ const Navigation = () => {
         ) : (
           <>
             <div>
-              Sveiki, {context.authUser.name} <button onClick={handleLogout}>Atsijungti</button>
+              Sveiki, {authUser.name} <button onClick={handleLogout}>Atsijungti</button>
+              <NavLink className={({ isActive }) => (isActive ? styles.active : 'active')} to={`/user/edit/${authUser.id}`}>
+                Edit
+              </NavLink>
             </div>
           </>
         )}
