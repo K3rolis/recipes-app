@@ -1,0 +1,24 @@
+.logoBox {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 60px;
+}
+
+.logo {
+  font-size: 2rem;
+  color: gray;
+  cursor: pointer;
+}
+
+.logo:hover {
+  color: var(--primary-text-color);
+}
+
+.footerText {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: gray;
+  margin-block: 30px;
+}

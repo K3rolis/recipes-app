@@ -9,7 +9,14 @@
 }
 
 html {
-  /* font-size: 62.5%; */
+  box-sizing: border-box;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
 }
 
 body {
@@ -22,4 +29,11 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.btn-outline-primary {
+  color: #ca2665;
+}
+.btn-outline-primary:hover {
+  color: #ca2665;
 }

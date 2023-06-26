@@ -18,11 +18,11 @@ const RecipePage = (props: Props) => {
   });
 
   if (isLoading) return <h1>Loading...</h1>;
-  console.log(recipes);
 
   return (
     <div>
       <Container>
+        <div className={styles.selectionTitle}>{recipes.name}</div>
         <div className={styles.itemsWrapper}>
           {recipes.recipes.map((recipe: CategoryRecipesProps) => (
             <RecipeItem key={recipe.id} {...recipe} categoryName={recipes.name} />

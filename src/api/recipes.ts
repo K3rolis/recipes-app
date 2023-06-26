@@ -16,3 +16,7 @@ export const updateRecipe = async ({ id, ...recipe }: any) => {
 export const deleteRecipe = async (id: number) => {
   return await axios.delete(`${API_URL}/recipes/${id}`);
 };
+
+export const getRecipes = async () => {
+  return await axios.get(`${API_URL}/recipes?&_limit=5`).then((res) => res.data);
+};

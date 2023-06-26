@@ -46,11 +46,19 @@ const CategoryForm = ({ onSubmit, initialValue, title, submit }: Props) => {
               '& > :not(style)': { width: '100%' },
             }}
           >
-            {' '}
-            <TextField id="name" label="name" name="name" variant="outlined" margin="normal" size="small" value={category.name} onChange={handleChangeInput} />
+            <TextField
+              id="name"
+              label="Category name"
+              name="name"
+              variant="outlined"
+              margin="normal"
+              size="small"
+              value={category.name}
+              onChange={handleChangeInput}
+            />
             <TextField
               id="imageUrl"
-              label="imageUrl"
+              label="Image URL"
               name="imageUrl"
               variant="outlined"
               margin="normal"

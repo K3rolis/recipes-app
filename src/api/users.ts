@@ -17,3 +17,7 @@ export const getUser = async (id: number) => {
 export const updateUser = async ({ id, ...user }: any) => {
   return await axios.put(`${API_URL}/users/${id}`, user);
 };
+
+export const deleteUser = async (id: number) => {
+  return await axios.delete(`${API_URL}/users/${id}`);
+};

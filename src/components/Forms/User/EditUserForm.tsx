@@ -4,7 +4,10 @@ import Container from '../../Container/Container';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import Button from 'react-bootstrap/Button';
+import { useMutation } from '@tanstack/react-query';
+import { deleteUser } from '../../../api/users';
+import { useParams } from 'react-router-dom';
 
 const EditUserForm = ({ onSubmit, initialValue }: any) => {
   const [user, setUser] = useState<any>({
@@ -12,6 +15,7 @@ const EditUserForm = ({ onSubmit, initialValue }: any) => {
     password: '',
     confirmPassword: '',
   });
+  const { userId } = useParams();
 
   const handleChangeInput = (e: any) => {
     setUser({
@@ -19,6 +23,10 @@ const EditUserForm = ({ onSubmit, initialValue }: any) => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const deleteUserMutation = useMutation({
+    mutationFn: deleteUser,
+  });
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -35,7 +43,7 @@ const EditUserForm = ({ onSubmit, initialValue }: any) => {
   return (
     <div>
       <Container className={styles.register}>
-        <h1>Edit FORM</h1>
+        <div className={styles.title}>Edit My Profile</div>
         <form onSubmit={handleSubmit}>
           <Box
             sx={{
@@ -66,11 +74,23 @@ const EditUserForm = ({ onSubmit, initialValue }: any) => {
               onChange={handleChangeInput}
             />
 
-            <Button variant="contained" type="submit">
+            <Button variant="primary" type="submit">
               Submit
             </Button>
           </Box>
         </form>
+
+        <Button
+          style={{ marginTop: '10px' }}
+          variant="danger"
+          onClick={() => {
+            if (window.confirm('Delete User?')) {
+              deleteUserMutation.mutate(Number(userId));
+            }
+          }}
+        >
+          DELETE USER
+        </Button>
       </Container>
     </div>
   );

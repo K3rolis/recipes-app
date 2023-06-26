@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Container from '../../components/Container/Container';
+import Button from 'react-bootstrap/Button';
 import styles from './CategoriesPage.module.css';
 
 import Table from '@mui/material/Table';
@@ -10,7 +11,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-import Button from '@mui/material/Button';
 import CategoryForm from '../../components/Forms/Category/CategoryForm';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { createCategory, deleteCategory, getCategories, updateCategory } from '../../api/categories';
@@ -64,9 +64,9 @@ const CategoriesPage = () => {
       <Container>
         <div className={styles.item}>
           <div className={styles.linkBox}>
-            <button className={styles.linkButton} onClick={() => [setIsCreate(!isCreate), setEditForm(null)]}>
+            <Button className={styles.linkButton} variant="outline-primary" onClick={() => [setIsCreate(!isCreate), setEditForm(null)]}>
               New Category
-            </button>
+            </Button>
           </div>
 
           {isCreate && <CategoryForm onSubmit={handleSubmit} title={'New Category'} submit={'Create'} initialValue={{}} />}
@@ -94,10 +94,10 @@ const CategoriesPage = () => {
                     </TableCell>
                     <TableCell align="left">{category.name}</TableCell>
                     <TableCell align="right">
-                      <Button variant="contained" onClick={() => [setEditForm(category), setIsCreate(false)]}>
+                      <Button className="me-2" variant="outline-dark" onClick={() => [setEditForm(category), setIsCreate(false)]}>
                         Edit
                       </Button>
-                      <Button variant="outlined" onClick={() => deleteCategoryMutation.mutate(category.id)}>
+                      <Button variant="outline-danger" onClick={() => deleteCategoryMutation.mutate(category.id)}>
                         Delete
                       </Button>
                     </TableCell>

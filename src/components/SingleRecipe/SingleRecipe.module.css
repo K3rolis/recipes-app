@@ -5,11 +5,12 @@
 .recipeBrief {
   display: flex;
   margin-bottom: 40px;
-  /* margin-top: 80px; */
 }
 
 .buttons {
-  text-align: right;
+  display: flex;
+  justify-content: end;
+  gap: 10px;
 }
 
 .imgBox {
@@ -171,4 +172,36 @@
 .metaData {
   display: flex;
   gap: 30px;
+}
+
+@media screen and (max-width: 1000px) {
+  .metaItems {
+    flex-direction: column;
+  }
+
+  .instructionsContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .recipeBrief {
+    flex-direction: column;
+  }
+  .metaItem .metaItemText:nth-child(3)::before {
+    content: '';
+  }
+  .metaItem {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .instructionsContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  ul {
+    padding: 0px;
+  }
 }

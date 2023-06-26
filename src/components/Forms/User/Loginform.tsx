@@ -36,7 +36,7 @@ const LoginForm = ({ onSubmit }: any) => {
   return (
     <div>
       <Container className={styles.register}>
-        <h1>LOGIN FORM</h1>
+        <div className={styles.title}>LOGIN FORM</div>
         <form onSubmit={handleSubmit}>
           <Box
             sx={{
@@ -46,7 +46,7 @@ const LoginForm = ({ onSubmit }: any) => {
             <TextField
               id="username"
               name="username"
-              label="Email"
+              label="Username"
               variant="outlined"
               margin="normal"
               size="small"
@@ -60,6 +60,7 @@ const LoginForm = ({ onSubmit }: any) => {
               variant="outlined"
               margin="normal"
               size="small"
+              type="password"
               value={user.password}
               onChange={handleChangeInput}
             />

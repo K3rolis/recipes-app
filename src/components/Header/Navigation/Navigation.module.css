@@ -26,3 +26,19 @@ a {
 .navbar a:hover {
   color: #ca2665;
 }
+
+.greetings {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.logoutButton {
+  cursor: pointer;
+  margin-block: 10px;
+}
+
+.logoutButton:hover {
+  text-decoration: underline;
+}

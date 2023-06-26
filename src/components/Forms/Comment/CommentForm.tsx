@@ -43,7 +43,7 @@ const CommentForm = ({ onSubmit, initialValue }: any) => {
     <form onSubmit={handleSubmit}>
       <Box
         sx={{
-          '& > :not(style)': { width: '100%' },
+          '& > :not(style)': { width: '100%', margin: 1 },
         }}
       >
         <TextField
@@ -53,11 +53,12 @@ const CommentForm = ({ onSubmit, initialValue }: any) => {
           onChange={changeInputValue}
           label="Comment"
           multiline
+          minRows={3}
           maxRows={10}
           placeholder="Comment..."
         />
         <Button variant="contained" type="submit">
-          Create
+          Submit
         </Button>
       </Box>
     </form>

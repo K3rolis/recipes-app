@@ -2,10 +2,10 @@ import React from 'react';
 import styles from './SingleRecipe.module.css';
 import { LuClock5 } from 'react-icons/lu';
 import { BiDish } from 'react-icons/bi';
-import Button from '@mui/material/Button/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { deleteRecipe } from '../../api/recipes';
+import Button from 'react-bootstrap/Button';
 
 type Props = {
   id?: number;
@@ -32,8 +32,12 @@ const SingleRecipe = (props: Props) => {
   return (
     <div className={styles.recipeContainer}>
       <div className={styles.buttons}>
-        <Link to={`/recipes/edit/${props.id}`}>Edit</Link>
-        <Button onClick={() => deleteRecipeMutation.mutate(Number(props.id))}>Delete</Button>
+        <Link to={`/recipes/edit/${props.id}`}>
+          <Button variant="outline-dark">Edit</Button>
+        </Link>
+        <Button variant="danger" onClick={() => deleteRecipeMutation.mutate(Number(props.id))}>
+          Delete
+        </Button>
       </div>
 
       <div className={styles.recipeBrief}>
@@ -76,7 +80,14 @@ const SingleRecipe = (props: Props) => {
         <div className={styles.methods}>
           <div className={styles.instructionsTitle}>Instructions</div>
           <div className={styles.instructions}>
-            <ol>{props.methods && props.methods.map((method: any) => <li className={styles.method}>{method.description}</li>)}</ol>
+            <ol>
+              {props.methods &&
+                props.methods.map((method: any, index: number) => (
+                  <li key={index} className={styles.method}>
+                    {method.description}
+                  </li>
+                ))}
+            </ol>
           </div>
         </div>
       </div>

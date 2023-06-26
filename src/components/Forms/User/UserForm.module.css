@@ -1,5 +1,12 @@
 .register {
+  margin-top: 150px;
   max-width: 500px;
   width: 100%;
   box-sizing: border-box;
+}
+
+.title {
+  font-size: 2.2rem;
+  text-align: center;
+  font-weight: 700;
 }

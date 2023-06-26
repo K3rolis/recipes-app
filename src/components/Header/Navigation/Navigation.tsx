@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styles from './Navigation.module.css';
 import Container from '../../Container/Container';
 import { LoginContext } from '../../Contexts/LoginContext';
+import { Button } from 'react-bootstrap';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 const Navigation = () => {
   const { isLoggedIn, setIsLoggedIn, authUser } = useContext(LoginContext);
@@ -27,26 +29,32 @@ const Navigation = () => {
           Categories
         </NavLink>
 
-        {!isLoggedIn ? (
-          <>
-            <NavLink className={({ isActive }) => (isActive ? styles.active : 'active')} to="/login/">
-              Login
-            </NavLink>
-
-            <NavLink className={({ isActive }) => (isActive ? styles.active : 'active')} to="/register/">
-              Register
-            </NavLink>
-          </>
-        ) : (
-          <>
-            <div>
-              Sveiki, {authUser.name} <button onClick={handleLogout}>Atsijungti</button>
-              <NavLink className={({ isActive }) => (isActive ? styles.active : 'active')} to={`/user/edit/${authUser.id}`}>
-                Edit
+        <Dropdown>
+          <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
+            {isLoggedIn ? `Sveiki, ${authUser.name}` : 'Login / Register'}
+          </Dropdown.Toggle>
+          {!isLoggedIn ? (
+            <Dropdown.Menu>
+              <NavLink className={({ isActive }) => (isActive ? styles.active : 'active')} to="/login/">
+                Login
               </NavLink>
-            </div>
-          </>
-        )}
+              <NavLink className={({ isActive }) => (isActive ? styles.active : 'active')} to="/register/">
+                Register
+              </NavLink>
+            </Dropdown.Menu>
+          ) : (
+            <Dropdown.Menu>
+              <div className={styles.greetings}>
+                <div className={styles.logoutButton} onClick={handleLogout}>
+                  Atsijungti
+                </div>
+                <NavLink className={({ isActive }) => (isActive ? styles.active : 'active')} to={`/user/edit/${authUser.id}`}>
+                  Edit
+                </NavLink>
+              </div>
+            </Dropdown.Menu>
+          )}
+        </Dropdown>
       </div>
     </Container>
   );

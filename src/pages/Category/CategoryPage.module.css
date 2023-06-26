@@ -1,6 +1,27 @@
 .categoriesWrapper {
+  padding-inline: 10px;
   display: grid;
   flex-wrap: wrap;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+}
+
+.sectionTitle {
+  font-size: 2.3rem;
+  margin-block: 15px;
+  display: flex;
+  justify-content: center;
+  font-weight: 700;
+}
+
+@media screen and (max-width: 900px) {
+  .categoriesWrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .categoriesWrapper {
+    grid-template-columns: 1fr;
+  }
 }

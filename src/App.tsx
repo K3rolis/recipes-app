@@ -12,6 +12,9 @@ import { LoginContext } from './components/Contexts/LoginContext';
 import RecipeEdit from './components/Forms/Recipe/RecipeEdit';
 import RecipeCreate from './components/Forms/Recipe/RecipeCreate';
 import EditUserPage from './pages/User/EditUserPage';
+import Footer from './components/Footer/Footer';
+
+
 
 function App() {
   const [authUser, setAuthUser] = useState<any | null>({
@@ -41,6 +44,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/user/edit/:userId" element={<EditUserPage />} />
         </Routes>
+        <Footer />
       </LoginContext.Provider>
     </div>
   );
