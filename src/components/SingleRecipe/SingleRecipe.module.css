@@ -1,7 +1,15 @@
+.recipeContainer {
+  margin-top: 60px;
+}
+
 .recipeBrief {
   display: flex;
   margin-bottom: 40px;
-  margin-top: 80px;
+  /* margin-top: 80px; */
+}
+
+.buttons {
+  text-align: right;
 }
 
 .imgBox {

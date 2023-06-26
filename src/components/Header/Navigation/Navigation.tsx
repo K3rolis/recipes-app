@@ -1,34 +1,18 @@
-import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { getCategories } from '../../../api/categories';
-import { useQuery } from '@tanstack/react-query';
+import React, { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 import styles from './Navigation.module.css';
 import Container from '../../Container/Container';
-
-type CategoryProps = {
-  id: number;
-  name: string;
-};
+import { LoginContext } from '../../Contexts/LoginContext';
 
 const Navigation = () => {
-  const {
-    // status,
-    isLoading,
-    isError,
-    error,
-    data: categories,
-  } = useQuery({
-    queryKey: ['categories'],
-    queryFn: getCategories,
-    onError: (error: any) => {
-      return <h1>{`Something went wrong: ${error.message} `}</h1>;
-    },
-  });
+  const context = useContext(LoginContext);
 
-  if (isLoading) return <h1>loading...</h1>;
-  if (isError) return <h1>{error.message}</h1>;
+  console.log(context.isLoggedIn);
 
-  console.log(getCategories());
+  const handleLogout = () => {
+    context.setIsLoggedIn(false);
+  };
+
   return (
     <Container>
       <div className={styles.navbar}>
@@ -43,21 +27,23 @@ const Navigation = () => {
           Categories
         </NavLink>
 
-        <NavLink className={({ isActive }) => (isActive ? styles.active : 'active')} to="/login/">
-          Login
-        </NavLink>
+        {!context.isLoggedIn ? (
+          <>
+            <NavLink className={({ isActive }) => (isActive ? styles.active : 'active')} to="/login/">
+              Login
+            </NavLink>
 
-        <NavLink className={({ isActive }) => (isActive ? styles.active : 'active')} to="/register/">
-          Register
-        </NavLink>
-
-        {/* 
-      {categories &&
-        categories.map((category: CategoryProps) => (
-          <NavLink key={category.id} to={`/recipes/categories/${category.id}`}>
-            {category.name}
-          </NavLink>
-        ))} */}
+            <NavLink className={({ isActive }) => (isActive ? styles.active : 'active')} to="/register/">
+              Register
+            </NavLink>
+          </>
+        ) : (
+          <>
+            <div>
+              Sveiki, {context.authUser.name} <button onClick={handleLogout}>Atsijungti</button>
+            </div>
+          </>
+        )}
       </div>
     </Container>
   );
