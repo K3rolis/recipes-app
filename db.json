@@ -17,12 +17,6 @@
       "email": "test@test.test",
       "password": "asd",
       "id": 3
-    },
-    {
-      "username": "ab",
-      "email": "jykyma@mailinator.com",
-      "password": "ab",
-      "id": 4
     }
   ],
   "recipes": [

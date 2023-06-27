@@ -10,6 +10,7 @@ import { getRecipe } from '../../api/recipes';
 import SingleRecipe from '../../components/SingleRecipe/SingleRecipe';
 import Button from 'react-bootstrap/Button';
 import { PropagateLoader } from 'react-spinners';
+import { toast } from 'react-toastify';
 
 const SingleRecipePage = () => {
   const { isLoggedIn, authUser } = useContext(LoginContext);
@@ -33,17 +34,35 @@ const SingleRecipePage = () => {
 
   const createCommentMutation = useMutation({
     mutationFn: createComment,
-    onSuccess: () => refetch(),
+    onSuccess: () => {
+      refetch();
+      toast.success('New comment added');
+    },
+    onError: () => {
+      toast.error('Server issues, please try again later');
+    },
   });
 
   const deleteCommentMutation = useMutation({
     mutationFn: deleteComment,
-    onSuccess: () => refetch(),
+    onSuccess: () => {
+      refetch();
+      toast.success('Comment deleted');
+    },
+    onError: () => {
+      toast.error('Server issues, please try again later');
+    },
   });
 
   const updateCommentMutation = useMutation({
     mutationFn: updateComment,
-    onSuccess: () => refetch(),
+    onSuccess: () => {
+      refetch();
+      toast.success('Comment updated');
+    },
+    onError: () => {
+      toast.error('Server issues, please try again later');
+    },
   });
 
   const handleNewComment = (comment: any) => {
