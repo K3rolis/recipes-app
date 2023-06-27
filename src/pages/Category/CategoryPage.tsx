@@ -6,6 +6,7 @@ import { getCategories } from '../../api/categories';
 import RecipeCategoryItem from '../../components/CategoryItem/CategoryItem';
 import { CategoriesProps } from '../../types/categories';
 import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 const RecipesPage = () => {
   const { data: categories } = useQuery({
@@ -16,7 +17,13 @@ const RecipesPage = () => {
   return (
     <div>
       <Container>
-        <Link to="/recipes/create/">New recipe</Link>
+        <div className={styles.sectionTitle}>Explore</div>
+        <div style={{ textAlign: 'right', margin: 2 }}>
+          <Link to="/recipes/create/">
+            <Button variant="outline-secondary">New Recipe</Button>
+          </Link>
+        </div>
+
         <div className={styles.categoriesWrapper}>
           {categories && categories.map((category: CategoriesProps) => <RecipeCategoryItem key={category.id} {...category} />)}
         </div>

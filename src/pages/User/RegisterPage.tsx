@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { createUser } from '../../api/users';
 import { UserProps } from '../../types/users';
 import RegisterForm from '../../components/Forms/User/RegisterForm';
+import { PropagateLoader } from 'react-spinners';
+import { toast } from 'react-toastify';
 
 const RegisterPage = () => {
   const [error, setError] = useState<any>(null);
@@ -11,7 +13,11 @@ const RegisterPage = () => {
 
   const createUserMutation = useMutation({
     mutationFn: createUser,
-    onSuccess: () => navigate('/'),
+    onSuccess: () => {
+      toast.success('User was created!');
+      navigate('/');
+    },
+    onError: () => navigate(`/notFound`),
   });
 
   const handleNewUser = (user: UserProps) => {
@@ -27,10 +33,12 @@ const RegisterPage = () => {
     }
   };
 
+  if (createUserMutation.isLoading) return <PropagateLoader className="loader" color="#36d7b7" />;
+
   return (
     <div>
       <RegisterForm onSubmit={handleNewUser} />
-      {error && <h1 style={{ color: 'red' }}>{error}</h1>}
+      {error && <div style={{ color: 'red', display: 'flex', justifyContent: 'center' }}>{error}</div>}
     </div>
   );
 };

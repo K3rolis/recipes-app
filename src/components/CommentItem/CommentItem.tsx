@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './CommentItem.module.css';
 
-import Button from '@mui/material/Button/Button';
+import Button from 'react-bootstrap/Button';
 
 const CommentItem = ({ handleEdit, handleDelete, ...props }: any) => {
   return (
@@ -14,10 +14,10 @@ const CommentItem = ({ handleEdit, handleDelete, ...props }: any) => {
         <div className={styles.buttons}>
           {props.showActions ? (
             <>
-              <Button onClick={() => handleEdit(props)} variant="contained">
+              <Button variant="outline-dark" onClick={() => handleEdit(props)}>
                 Edit
               </Button>
-              <Button onClick={() => handleDelete(props.id)} variant="outlined">
+              <Button variant="danger" onClick={() => handleDelete(props.id)}>
                 Delete
               </Button>
             </>
@@ -27,7 +27,6 @@ const CommentItem = ({ handleEdit, handleDelete, ...props }: any) => {
         </div>
       </div>
       <div className={styles.commentBody}>{props.description}</div>
-      <hr />
     </div>
   );
 };

@@ -47,8 +47,18 @@ const CategoryForm = ({ onSubmit, initialValue, title, submit }: Props) => {
             }}
           >
             <TextField
+              id="name"
+              label="Category name"
+              name="name"
+              variant="outlined"
+              margin="normal"
+              size="small"
+              value={category.name}
+              onChange={handleChangeInput}
+            />
+            <TextField
               id="imageUrl"
-              label="imageUrl"
+              label="Image URL"
               name="imageUrl"
               variant="outlined"
               margin="normal"
@@ -56,7 +66,6 @@ const CategoryForm = ({ onSubmit, initialValue, title, submit }: Props) => {
               value={category.imageUrl}
               onChange={handleChangeInput}
             />
-
             <Button variant="contained" type="submit">
               {submit}
             </Button>

@@ -17,6 +17,12 @@
       "email": "asd",
       "password": "asd",
       "id": 3
+    },
+    {
+      "username": "labas",
+      "email": "asd",
+      "password": "asd",
+      "id": 4
     }
   ],
   "recipes": [
@@ -57,8 +63,7 @@
       "id": 1
     },
     {
-      "id": 2,
-      "userId": 1,
+      "userId": 2,
       "categoryId": 2,
       "title": "labasa",
       "imageUrl": "https://www.countdown.co.nz/Content/Recipes/219268_Winter%20Recipes%20Tiles_Tomato_Chickpea_Soup_810x520.jpg",
@@ -68,10 +73,10 @@
       "description": "A simple but flavoursome meal even the fussiest of eaters will enjoy. Inspired by warming Indian flavours, you’ll be surprised by how quickly this delicious meal comes together! Perfect when served simply with rice, or step it up a notch and add a serving of warmed buttered naan.",
       "ingredients": [
         {
-          "name": "onion10"
+          "name": "100g onions"
         },
         {
-          "name": "onion12"
+          "name": "200g chicken breast"
         },
         {
           "name": "onion10"
@@ -90,13 +95,13 @@
         {
           "description": "Pour in the beef stock and bring to a simmer. "
         }
-      ]
+      ],
+      "id": 2
     },
     {
-      "id": 3,
-      "userId": 1,
+      "userId": null,
       "categoryId": 1,
-      "title": "labas",
+      "title": "Cheese and thyme soda bread ",
       "imageUrl": "https://www.countdown.co.nz/Content/Recipes/219268_Winter%20Recipes%20Tiles_Tomato_Chickpea_Soup_810x520.jpg",
       "servings": 4,
       "prepTime": 15,
@@ -111,6 +116,18 @@
         },
         {
           "name": "o asdnion10"
+        },
+        {
+          "name": ""
+        },
+        {
+          "name": ""
+        },
+        {
+          "name": ""
+        },
+        {
+          "name": ""
         }
       ],
       "methods": [
@@ -126,14 +143,15 @@
         {
           "description": "Pour in the beef stock and bring to a simmer. "
         }
-      ]
+      ],
+      "id": 3
     }
   ],
   "categories": [
     {
-      "id": 1,
       "name": "Soups",
-      "imageUrl": "https://www.countdown.co.nz/content/f23-june-budget-friendly.jpg"
+      "imageUrl": "https://www.countdown.co.nz/content/f23-june-budget-friendly.jpg",
+      "id": 1
     },
     {
       "id": 2,
@@ -149,6 +167,11 @@
       "id": 4,
       "name": "SoSups",
       "imageUrl": "https://www.countdown.co.nz/content/f23-june-budget-friendly.jpg"
+    },
+    {
+      "name": "a",
+      "imageUrl": "baaa",
+      "id": 5
     }
   ],
   "comments": [
@@ -175,7 +198,7 @@
     },
     {
       "userId": 2,
-      "description": "Ye ye ye it was very delicioussssssss",
+      "description": "Ye ye ye it was very deliciouss",
       "postedDate": "2023-6-26",
       "recipeId": 2,
       "id": 4

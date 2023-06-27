@@ -2,18 +2,15 @@ import React from 'react';
 import RecipeForm from './RecipeForm';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { getRecipe, updateRecipe } from '../../../api/recipes';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { PropagateLoader } from 'react-spinners';
+import { toast } from 'react-toastify';
 
-type Props = {};
-
-const RecipeEdit = (props: Props) => {
+const RecipeEdit = () => {
   const { recipeId } = useParams();
+  const navigate = useNavigate();
 
-  const {
-    isLoading,
-    isError,
-    data: recipe,
-  } = useQuery({
+  const { isLoading, data: recipe } = useQuery({
     queryKey: ['recipe', Number(recipeId)],
     queryFn: () => getRecipe(Number(recipeId)),
   });
@@ -21,12 +18,13 @@ const RecipeEdit = (props: Props) => {
   const updateRecipeMutation = useMutation({
     mutationFn: updateRecipe,
     onSuccess: (data) => {
-      //   queryClient.setQueriesData(['users', Number(userId)], data);
-      //   navigate(`/users/${Number(userId)}`);
+      toast.success('Recipe was created Successfully!');
+      navigate(`/recipes/category/${data.data.categoryId}/recipe/${Number(recipeId)}`);
     },
+    onError: () => navigate(`/notFound`),
   });
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading || updateRecipeMutation.isLoading) return <PropagateLoader className="loader" color="#36d7b7" />;
 
   const handleSubmit = (recipe: any) => {
     console.log(recipe);

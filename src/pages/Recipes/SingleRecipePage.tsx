@@ -1,8 +1,5 @@
 import { useContext, useState } from 'react';
-import styles from './SingleRecipePage.module.css';
 import Container from '../../components/Container/Container';
-import { LuClock5 } from 'react-icons/lu';
-import { BiDish } from 'react-icons/bi';
 import CommentForm from '../../components/Forms/Comment/CommentForm';
 import { LoginContext } from '../../components/Contexts/LoginContext';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -11,6 +8,8 @@ import { useParams } from 'react-router-dom';
 import CommentItem from '../../components/CommentItem/CommentItem';
 import { getRecipe } from '../../api/recipes';
 import SingleRecipe from '../../components/SingleRecipe/SingleRecipe';
+import Button from 'react-bootstrap/Button';
+import { PropagateLoader } from 'react-spinners';
 
 const SingleRecipePage = () => {
   const { isLoggedIn, authUser } = useContext(LoginContext);
@@ -59,13 +58,14 @@ const SingleRecipePage = () => {
 
   const handleEdit = (comment: any) => {
     setEditForm(comment);
+    setOpenComment(false);
   };
 
   const handleDelete = (id: any) => {
     deleteCommentMutation.mutate(id);
   };
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <PropagateLoader className="loader" color="#36d7b7" />;
 
   return (
     <div>
@@ -74,7 +74,11 @@ const SingleRecipePage = () => {
 
         <h2>Comments {`(${comments.length})`}</h2>
 
-        {isLoggedIn && <button onClick={() => setOpenComment(!openComment)}>New Comment</button>}
+        {isLoggedIn && (
+          <Button style={{ margin: 8 }} onClick={() => [setOpenComment(!openComment), setEditForm(null)]}>
+            New Comment
+          </Button>
+        )}
 
         {isLoggedIn && openComment && <CommentForm onSubmit={handleNewComment} initialValue={{}} />}
         {comments?.map((comment: any) => (

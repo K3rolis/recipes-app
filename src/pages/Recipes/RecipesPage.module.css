@@ -4,3 +4,11 @@
   flex-wrap: wrap;
 }
 
+.selectionTitle {
+  display: flex;
+  justify-content: center;
+  margin-block: 15px;
+  font-size: 2.2rem;
+  /* color: var(--primary-text-color); */
+  font-weight: 700;
+}

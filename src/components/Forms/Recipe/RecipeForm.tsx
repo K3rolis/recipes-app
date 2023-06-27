@@ -3,12 +3,15 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { LoginContext } from '../../Contexts/LoginContext';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { createRecipe } from '../../../api/recipes';
+import { useQuery } from '@tanstack/react-query';
 import { getCategories } from '../../../api/categories';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import { CreateRecipesProps } from '../../../types/recipes';
+import Container from '../../Container/Container';
+import { FormControl, Grid, InputLabel } from '@mui/material';
+import styles from './RecipeForm.module.css';
+import { PropagateLoader } from 'react-spinners';
 
 const RecipeForm = ({ onSubmit, initialValue }: any) => {
   const { authUser } = useContext(LoginContext);
@@ -21,8 +24,8 @@ const RecipeForm = ({ onSubmit, initialValue }: any) => {
     prepTime: initialValue.prepTime || '',
     cookingTime: initialValue.cookingTime || '',
     description: initialValue.description || '',
-    ingredients: initialValue.ingredients || [{ name: '' }],
-    methods: initialValue.methods || [{ description: '' }],
+    ingredients: initialValue.ingredients || [{ name: '' }, { name: '' }, { name: '' }],
+    methods: initialValue.methods || [{ description: '' }, { description: '' }, { description: '' }, { description: '' }],
   });
 
   const changeInputValue = (e: any) => {
@@ -32,7 +35,7 @@ const RecipeForm = ({ onSubmit, initialValue }: any) => {
     });
   };
 
-  const handleIngredientsInput = (index: any, e: any) => {
+  const handleIngredientsInput = (index: number, e: any) => {
     const { name, value } = e.target;
     const list = [...recipe.ingredients];
     list[index][name] = value;
@@ -77,83 +80,170 @@ const RecipeForm = ({ onSubmit, initialValue }: any) => {
     onSubmit(recipe);
   };
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <PropagateLoader className="loader" color="#36d7b7" />;
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Box
-        sx={{
-          '& > :not(style)': { width: '100%' },
-        }}
-      >
-        {categories && (
-          <Select label="Category" labelId="demo-simple-select-label" id="categoryId" name="categoryId" value={recipe.categoryId} onChange={changeInputValue}>
-            {categories.map((category: any) => (
-              <MenuItem key={category.id} value={category.id}>
-                {category.name}
-              </MenuItem>
-            ))}
-          </Select>
-        )}
+    <Container className={styles.formContainer}>
+      <FormControl fullWidth>
+        <form onSubmit={handleSubmit}>
+          <Box sx={{ width: '100%' }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={6}>
+                {categories && (
+                  <FormControl fullWidth>
+                    <InputLabel id="categories">Category</InputLabel>
+                    <Select
+                      label="Category"
+                      labelId="categories"
+                      id="categoryId"
+                      name="categoryId"
+                      size="medium"
+                      margin="dense"
+                      value={recipe.categoryId}
+                      onChange={changeInputValue}
+                      fullWidth
+                    >
+                      {categories.map((category: any) => (
+                        <MenuItem key={category.id} value={category.id}>
+                          {category.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                )}
+              </Grid>
 
-        <TextField label="Title" name="title" variant="outlined" margin="normal" size="small" value={recipe.title} onChange={changeInputValue} />
-        <TextField label="Image URL" name="imageUrl" variant="outlined" margin="normal" size="small" value={recipe.imageUrl} onChange={changeInputValue} />
-        <TextField label="Servings" name="servings" variant="outlined" margin="normal" size="small" value={recipe.servings} onChange={changeInputValue} />
-        <TextField label="Prep Time" name="prepTime" variant="outlined" margin="normal" size="small" value={recipe.prepTime} onChange={changeInputValue} />
-        <TextField
-          label="Cooking Time"
-          name="cookingTime"
-          variant="outlined"
-          margin="normal"
-          size="small"
-          value={recipe.cookingTime}
-          onChange={changeInputValue}
-        />
-        <TextField
-          label="Description"
-          name="description"
-          variant="outlined"
-          margin="normal"
-          size="small"
-          value={recipe.description}
-          onChange={changeInputValue}
-        />
+              <Grid item xs={12} md={6}>
+                <TextField
+                  fullWidth
+                  label="Title"
+                  name="title"
+                  variant="outlined"
+                  margin="normal"
+                  size="small"
+                  value={recipe.title}
+                  onChange={changeInputValue}
+                />
+              </Grid>
+              <Grid item xs={12} md={12}>
+                <TextField
+                  fullWidth
+                  label="Image URL"
+                  name="imageUrl"
+                  variant="outlined"
+                  margin="normal"
+                  size="small"
+                  value={recipe.imageUrl}
+                  onChange={changeInputValue}
+                />
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <TextField
+                  fullWidth
+                  label="Servings"
+                  name="servings"
+                  variant="outlined"
+                  margin="normal"
+                  size="small"
+                  value={recipe.servings}
+                  onChange={changeInputValue}
+                />
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <TextField
+                  fullWidth
+                  label="Prep Time"
+                  name="prepTime"
+                  variant="outlined"
+                  margin="normal"
+                  size="small"
+                  value={recipe.prepTime}
+                  onChange={changeInputValue}
+                />
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <TextField
+                  fullWidth
+                  label="Cooking Time"
+                  name="cookingTime"
+                  variant="outlined"
+                  margin="normal"
+                  size="small"
+                  value={recipe.cookingTime}
+                  onChange={changeInputValue}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Description"
+                  name="description"
+                  variant="outlined"
+                  margin="normal"
+                  size="small"
+                  multiline
+                  maxRows={4}
+                  minRows={2}
+                  value={recipe.description}
+                  onChange={changeInputValue}
+                />
+              </Grid>
+              <Button variant="contained" onClick={handleAddIngredient}>
+                Add Ingredient
+              </Button>
+              <div className={styles.ingredientsBox}>
+                {recipe.ingredients.map((ingredient: any, index: any) => (
+                  <Grid item xs={12} sm={5} md={3} lg={3} margin={1}>
+                    <div key={index}>
+                      <TextField
+                        fullWidth
+                        name="name"
+                        label="New Ingredient"
+                        margin="dense"
+                        size="small"
+                        value={ingredient.name}
+                        onChange={(e) => handleIngredientsInput(index, e)}
+                      />
+                      <Button onClick={() => handleRemoveIngredient(index)}>Remove Ingredient</Button>
+                    </div>
+                  </Grid>
+                ))}
+              </div>
 
-        {recipe.ingredients.map((ingredient: any, index: any) => (
-          <div key={index}>
-            <TextField
-              name="name"
-              label="New Ingredient"
-              margin="dense"
-              size="small"
-              value={ingredient.name}
-              onChange={(e) => handleIngredientsInput(index, e)}
-            />
-            <button onClick={() => handleRemoveIngredient(index)}>handleRemoveIngredient</button>
-          </div>
-        ))}
-        <button onClick={handleAddIngredient}>add more</button>
+              <Button variant="contained" onClick={handleAddMethod}>
+                Add method
+              </Button>
 
-        {recipe.methods.map((method: any, index: any) => (
-          <div key={index}>
-            <TextField
-              name="description"
-              label="New Method"
-              margin="dense"
-              size="small"
-              value={method.description}
-              onChange={(e) => handleMethodsInput(index, e)}
-            />
-            <button onClick={() => handleRemoveMethod(index)}>Delete method</button>
-          </div>
-        ))}
-        <button onClick={handleAddMethod}>add more</button>
+              <div className={styles.ingredientsBox}>
+                {recipe.methods.map((method: any, index: any) => (
+                  <Grid item xs={12} sm={12} margin={2}>
+                    <div key={index}>
+                      <TextField
+                        fullWidth
+                        name="description"
+                        label="New Method"
+                        margin="dense"
+                        size="small"
+                        multiline
+                        minRows={3}
+                        maxRows={8}
+                        value={method.description}
+                        onChange={(e) => handleMethodsInput(index, e)}
+                      />
+                      <Button onClick={() => handleRemoveMethod(index)}>Delete step</Button>
+                    </div>
+                  </Grid>
+                ))}
+              </div>
 
-        <Button variant="contained" type="submit">
-          Submit
-        </Button>
-      </Box>
-    </form>
+              <Button variant="contained" type="submit">
+                Submit
+              </Button>
+            </Grid>
+          </Box>
+        </form>
+      </FormControl>
+    </Container>
   );
 };
 

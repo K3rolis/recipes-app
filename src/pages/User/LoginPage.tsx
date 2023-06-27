@@ -25,7 +25,7 @@ const LoginPage = () => {
   return (
     <div>
       <LoginForm onSubmit={handleLogin} />
-      {error && <h1>{error}</h1>}
+      {error && <div style={{ color: 'red', display: 'flex', justifyContent: 'center' }}>{error}</div>}
     </div>
   );
 };

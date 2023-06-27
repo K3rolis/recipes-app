@@ -1,0 +1,80 @@
+.heroBanner {
+  background-image: url(https://www.newworld.co.nz/-/media/Project/Sitecore/Brands/Brand-New-World/Somethings-Cooking/hero-small-TraybakeChicken-33.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center right;
+  /* background-size: 100%; */
+  height: 430px;
+  position: relative;
+}
+
+.containerBox {
+  height: 100%;
+  margin-right: auto;
+  position: relative;
+}
+
+.heroBox {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 2.2rem;
+  gap: 20px;
+}
+
+.heroTitle {
+  font-weight: 700;
+}
+
+.heroBodyText {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--primary-text-color);
+  line-height: 1.5;
+}
+
+.itemsWrapper {
+  margin-left: 20px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  height: 100%;
+}
+
+.sectionTitle {
+  margin-block: 30px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 830px) {
+  .heroBanner {
+    height: 300px;
+  }
+  .heroBox {
+    position: absolute;
+    height: 62%;
+    bottom: 50%;
+    transform: translateY(50%);
+    left: 0;
+    width: 300px;
+
+    background-color: red;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-size: 1.8rem;
+  }
+  .heroBodyText {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--primary-text-color);
+    line-height: 1.5;
+  }
+
+  .itemsWrapper {
+    gap: 10px;
+  }
+}
