@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Container from '../../components/Container/Container';
 import Button from 'react-bootstrap/Button';
 import styles from './CategoriesPage.module.css';
@@ -12,15 +12,17 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 import CategoryForm from '../../components/Forms/Category/CategoryForm';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { createCategory, deleteCategory, getCategories, updateCategory } from '../../api/categories';
 import { CategoriesProps } from '../../types/categories';
 import { PropagateLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
+import { LoginContext } from '../../components/Contexts/LoginContext';
 
 const CategoriesPage = () => {
   const [isCreate, setIsCreate] = useState(false);
   const [editForm, setEditForm] = useState<any | null>(null);
+  const { isLoggedIn } = useContext(LoginContext);
 
   const {
     refetch,
@@ -29,14 +31,6 @@ const CategoriesPage = () => {
   } = useQuery({
     queryKey: ['categories'],
     queryFn: getCategories,
-  });
-
-  const deleteCategoryMutation = useMutation({
-    mutationFn: deleteCategory,
-    onSuccess: () => {
-      toast.success('Category was deleted successfully!');
-      refetch();
-    },
   });
 
   const createCategoryMutation = useMutation({
@@ -67,7 +61,13 @@ const CategoriesPage = () => {
       });
     }
     setEditForm(null);
+    setIsCreate(false);
   };
+
+  const deleteCategoryMutation = useMutation({
+    mutationFn: deleteCategory,
+    onSuccess: () => refetch(),
+  });
 
   if (isLoading || updateCategoryMutation.isLoading || createCategoryMutation.isLoading || updateCategoryMutation.isLoading) {
     return <PropagateLoader className="loader" color="#36d7b7" />;
@@ -78,9 +78,11 @@ const CategoriesPage = () => {
       <Container>
         <div className={styles.item}>
           <div className={styles.linkBox}>
-            <Button className={styles.linkButton} variant="outline-primary" onClick={() => [setIsCreate(!isCreate), setEditForm(null)]}>
-              New Category
-            </Button>
+            {isLoggedIn && (
+              <Button className={styles.linkButton} variant="outline-primary" onClick={() => [setIsCreate(!isCreate), setEditForm(null)]}>
+                New Category
+              </Button>
+            )}
           </div>
 
           {isCreate && <CategoryForm onSubmit={handleSubmit} title={'New Category'} submit={'Create'} initialValue={{}} />}
@@ -111,7 +113,7 @@ const CategoriesPage = () => {
                       <Button className="me-2" variant="outline-dark" onClick={() => [setEditForm(category), setIsCreate(false)]}>
                         Edit
                       </Button>
-                      <Button variant="outline-danger" onClick={() => deleteCategoryMutation.mutate(category.id)}>
+                      <Button variant="outline-danger" onClick={() => deleteCategoryMutation.mutate(Number(category.id))}>
                         Delete
                       </Button>
                     </TableCell>

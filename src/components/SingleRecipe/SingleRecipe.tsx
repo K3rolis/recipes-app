@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './SingleRecipe.module.css';
 import { LuClock5 } from 'react-icons/lu';
 import { BiDish } from 'react-icons/bi';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { deleteRecipe } from '../../api/recipes';
 import Button from 'react-bootstrap/Button';
@@ -26,13 +26,17 @@ type Props = {
 
 const SingleRecipe = (props: Props) => {
   const navigate = useNavigate();
+  const { categoryId } = useParams();
   const deleteRecipeMutation = useMutation({
     mutationFn: deleteRecipe,
     onSuccess: () => {
       toast.success('Recipe was deleted.');
-      navigate(`/recipes/category/${props.id}`);
+      navigate(`/recipes`);
     },
-    onError: () => navigate(`/notFound`),
+    onError: () => {
+      navigate(`/recipes/category/${categoryId}`);
+      toast.success('Recipe was deleted.');
+    },
   });
 
   if (deleteRecipeMutation.isLoading) return <PropagateLoader className="loader" color="#36d7b7" />;

@@ -8,9 +8,7 @@ import { getRecipesByCategory } from '../../api/categories';
 import { CategoryRecipesProps } from '../../types/categories';
 import { PropagateLoader } from 'react-spinners';
 
-type Props = {};
-
-const RecipePage = (props: Props) => {
+const RecipePage = () => {
   const { categoryId } = useParams();
 
   const { isLoading, data: recipes } = useQuery({
@@ -25,9 +23,9 @@ const RecipePage = (props: Props) => {
       <Container>
         <div className={styles.selectionTitle}>{recipes.name}</div>
         <div className={styles.itemsWrapper}>
-          {recipes.recipes.map((recipe: CategoryRecipesProps) => (
-            <RecipeItem key={recipe.id} {...recipe} categoryName={recipes.name} />
-          ))}
+          {recipes.recipes && recipes.recipes.map((recipe: CategoryRecipesProps) => <RecipeItem key={recipe.id} {...recipe} categoryName={recipes.name} />)}
+
+          {recipes.recipes.length === 0 && <h1>Sorry, but not found :/</h1>}
         </div>
       </Container>
     </div>

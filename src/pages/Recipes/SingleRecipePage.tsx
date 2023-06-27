@@ -65,7 +65,7 @@ const SingleRecipePage = () => {
     deleteCommentMutation.mutate(id);
   };
 
-  if (isLoading) return <PropagateLoader className="loader" color="#36d7b7" />;
+  if (deleteCommentMutation.isLoading || isLoading) return <PropagateLoader className="loader" color="#36d7b7" />;
 
   return (
     <div>
@@ -86,7 +86,7 @@ const SingleRecipePage = () => {
             <CommentItem
               {...comment}
               userName={comment.user.username}
-              showActions={comment.userId === authUser.id || false}
+              showActions={(isLoggedIn && comment.userId === authUser.id) || false}
               handleEdit={handleEdit}
               handleDelete={handleDelete}
             />
