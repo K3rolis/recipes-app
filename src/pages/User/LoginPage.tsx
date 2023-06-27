@@ -9,7 +9,9 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleLogin = (users: any, user: any) => {
-    const loggedUser = users.find((element: any) => element.username === user.username && element.password === user.password);
+    const loggedUser = users.find(
+      (element: any) => element.username.toLowerCase() === user.username.toLowerCase() && element.password.toLowerCase() === user.password.toLowerCase()
+    );
 
     if (loggedUser) {
       auth.setAuthUser({

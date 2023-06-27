@@ -7,7 +7,7 @@ export const createComment = async (comment: CreateCommentProps) => {
 };
 
 export const deleteComment = async (id: number) => {
-  return await axios.delete(`${API_URL}/comments/${id}`);
+  return await axios.delete(`${API_URL}/comments/${id}`).then((res) => res.data);
 };
 
 export const getComments = async (id: number) => {

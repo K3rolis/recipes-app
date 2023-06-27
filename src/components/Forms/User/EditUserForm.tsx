@@ -17,6 +17,8 @@ const EditUserForm = ({ onSubmit, initialValue }: any) => {
     confirmPassword: '',
   });
 
+  const [error, setError] = useState<string>('');
+
   const navigate = useNavigate();
   const { userId } = useParams();
 
@@ -38,7 +40,14 @@ const EditUserForm = ({ onSubmit, initialValue }: any) => {
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
-    onSubmit(user);
+    if (user.password !== user.confirmPassword) {
+      setError(`Your password doesn't match`);
+    } else if (user.password === '') {
+      setError(`Your password can't be empty`);
+    } else {
+      onSubmit(user);
+      setError('');
+    }
 
     setUser({
       email: user.email,
@@ -80,6 +89,7 @@ const EditUserForm = ({ onSubmit, initialValue }: any) => {
               value={user.confirmPassword}
               onChange={handleChangeInput}
             />
+            {error && <div style={{ color: 'red', display: 'flex', justifyContent: 'center' }}>{error}</div>}
 
             <Button variant="primary" type="submit">
               Submit
