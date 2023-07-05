@@ -4,21 +4,22 @@ import styles from './CategoryForm.module.css';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { CategoriesProps } from '../../../types/categories';
 
-type Props = {
-  onSubmit: any;
-  initialValue: any;
+type CategoryProps = {
+  onSubmit: (category: CategoriesProps) => void;
+  initialValue: CategoriesProps;
   title: string;
   submit: string;
 };
 
-const CategoryForm = ({ onSubmit, initialValue, title, submit }: Props) => {
+const CategoryForm = ({ onSubmit, initialValue, title, submit }: CategoryProps) => {
   const [category, setCategories] = useState({
     name: initialValue.name || '',
     imageUrl: initialValue.imageUrl || '',
   });
 
-  const handleChangeInput = (e: any) => {
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCategories({
       ...category,
       [e.target.name]: e.target.value,

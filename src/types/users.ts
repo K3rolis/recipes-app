@@ -5,3 +5,9 @@ export type UserProps = {
   password: string;
   confirmPassword?: string;
 };
+
+export type UserLoginProps = {
+  id?: number;
+  username: string;
+  password: string;
+};

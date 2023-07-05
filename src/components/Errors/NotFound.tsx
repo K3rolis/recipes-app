@@ -3,9 +3,7 @@ import Container from '../Container/Container';
 import { Link } from 'react-router-dom';
 import styles from './NotFound.module.css';
 
-type Props = {};
-
-const NotFound = (props: Props) => {
+const NotFound = () => {
   return (
     <Container>
       <div className={styles.errorBox}>

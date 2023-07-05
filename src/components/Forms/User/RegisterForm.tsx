@@ -5,16 +5,21 @@ import Container from '../../Container/Container';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { UserProps } from '../../../types/users';
 
-const RegisterForm = ({ onSubmit }: any) => {
-  const [user, setUser] = useState({
+type props = {
+  onSubmit: (user: UserProps) => void;
+};
+
+const RegisterForm = ({ onSubmit }: props) => {
+  const [user, setUser] = useState<UserProps>({
     username: '',
     email: '',
     password: '',
     confirmPassword: '',
   });
 
-  const handleChangeInput = (e: any) => {
+  const handleChangeInput = (e: { target: { name: string; value: string } }) => {
     setUser({
       ...user,
       [e.target.name]: e.target.value,

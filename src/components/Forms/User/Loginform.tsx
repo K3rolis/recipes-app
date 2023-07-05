@@ -8,8 +8,13 @@ import Button from '@mui/material/Button';
 import { useQuery } from '@tanstack/react-query';
 import { getUsers } from '../../../api/users';
 import { PropagateLoader } from 'react-spinners';
+import { UserLoginProps, UserProps } from '../../../types/users';
 
-const LoginForm = ({ onSubmit }: any) => {
+type Props = {
+  onSubmit: (users: UserProps, user: UserLoginProps) => void;
+};
+
+const LoginForm = ({ onSubmit }: Props) => {
   const [user, setUser] = useState({
     username: '',
     password: '',
@@ -22,12 +27,12 @@ const LoginForm = ({ onSubmit }: any) => {
 
   if (isLoading) return <PropagateLoader className="loader" color="#36d7b7" />;
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     onSubmit(users, user);
   };
 
-  const handleChangeInput = (e: any) => {
+  const handleChangeInput = (e: { target: { name: string; value: string } }) => {
     setUser({
       ...user,
       [e.target.name]: e.target.value,

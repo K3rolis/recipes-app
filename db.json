@@ -9,7 +9,7 @@
     {
       "username": "Kerolis",
       "email": "kazisuveiks@gmail.com",
-      "password": "asd",
+      "password": "asdasd",
       "id": 2
     },
     {
@@ -20,57 +20,6 @@
     }
   ],
   "recipes": [
-    {
-      "userId": 1,
-      "categoryId": 1,
-      "title": "Cheese and thyme soda bread ",
-      "imageUrl": "https://www.countdown.co.nz/Content/Recipes/219268_Winter%20Recipes%20Tiles_Tomato_Chickpea_Soup_810x520.jpg",
-      "servings": 4,
-      "prepTime": 15,
-      "cookingTime": 120,
-      "description": "Cover this cheese and thyme soda bread in butter or dunk it in your favourite stew or soup for a wonderful time. As an Irish-style bread, its madewithout any yeast and is incredibly versatile",
-      "ingredients": [
-        {
-          "name": "100g wholegrain flour"
-        },
-        {
-          "name": "375g plain flour"
-        },
-        {
-          "name": "1 tsp bicarbonate of soda"
-        },
-        {
-          "name": "200g mature cheddar, grated"
-        },
-        {
-          "name": "1 tbsp thyme leaves, chopped "
-        },
-        {
-          "name": "350ml buttermilk"
-        },
-        {
-          "name": "1 large free-range egg"
-        },
-        {
-          "name": "Pinch sea salt flakes"
-        }
-      ],
-      "methods": [
-        {
-          "description": "Heat a generous drizzle of oil in a large frying pan over medium heat. Sauté the onion, garlic and ginger for 3-4 minutes, or until the onion has softened."
-        },
-        {
-          "description": "Add the beef mince and cook for 6-8 minutes or until browned. "
-        },
-        {
-          "description": "Stir in the garam masala, chilli powder, ground cumin and turmeric and cook for a further few minutes, or until fragrant."
-        },
-        {
-          "description": "Pour in the beef stock and bring to a simmer. "
-        }
-      ],
-      "id": 1
-    },
     {
       "userId": 2,
       "categoryId": 3,
@@ -493,6 +442,81 @@
         }
       ],
       "id": 9
+    },
+    {
+      "userId": 2,
+      "categoryId": 2,
+      "title": "Rerum quod voluptatu",
+      "imageUrl": "Consequatur accusamu",
+      "servings": null,
+      "prepTime": null,
+      "cookingTime": null,
+      "description": "Est veritatis consec",
+      "ingredients": [
+        {
+          "name": "Salvador Glover"
+        },
+        {
+          "name": "Nathan Roth"
+        },
+        {
+          "name": "Kevin Warner"
+        }
+      ],
+      "methods": [
+        {
+          "description": "Proident consectetu"
+        },
+        {
+          "description": "In in exercitationem"
+        },
+        {
+          "description": "Et commodo quisquam "
+        },
+        {
+          "description": "Cum autem quidem ips"
+        }
+      ],
+      "id": 10
+    },
+    {
+      "userId": 2,
+      "categoryId": "",
+      "title": "Sit natus quis tempo",
+      "imageUrl": "Adipisicing reiciend",
+      "servings": null,
+      "prepTime": null,
+      "cookingTime": null,
+      "description": "Dolorum et magni min",
+      "ingredients": [
+        {
+          "name": "Yuri Marquez"
+        },
+        {
+          "name": "Hayes Bright"
+        },
+        {
+          "name": "Sonia Berger"
+        }
+      ],
+      "methods": [
+        {
+          "description": "Ea repellendus Dele"
+        },
+        {
+          "description": "Veritatis delectus "
+        },
+        {
+          "description": "Enim non irure dolor"
+        },
+        {
+          "description": "Mollit officiis mole"
+        },
+        {
+          "description": ""
+        }
+      ],
+      "id": 11
     }
   ],
   "categories": [
@@ -518,13 +542,6 @@
     }
   ],
   "comments": [
-    {
-      "id": 1,
-      "userId": 1,
-      "description": "Fantastic",
-      "postedDate": "2022-02-02",
-      "recipeId": 1
-    },
     {
       "userId": 2,
       "description": "Perfecto, delicousimo",

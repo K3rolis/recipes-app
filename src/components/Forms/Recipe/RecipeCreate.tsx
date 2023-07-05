@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { createRecipe } from '../../../api/recipes';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { RecipeProps } from '../../../types/recipes';
 
 const RecipeCreate = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const RecipeCreate = () => {
       cookingTime: Number(recipe.cookingTime),
     });
   };
-  return <RecipeForm onSubmit={handleSubmit} initialValue={{}} />;
+  return <RecipeForm onSubmit={handleSubmit} initialValue={{} as RecipeProps} />;
 };
 
 export default RecipeCreate;

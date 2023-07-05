@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -7,38 +7,53 @@ import { useQuery } from '@tanstack/react-query';
 import { getCategories } from '../../../api/categories';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import { CreateRecipesProps } from '../../../types/recipes';
+import { RecipeProps } from '../../../types/recipes';
 import Container from '../../Container/Container';
 import { FormControl, Grid, InputLabel } from '@mui/material';
 import styles from './RecipeForm.module.css';
 import { PropagateLoader } from 'react-spinners';
+import { CategoriesProps } from '../../../types/categories';
 
-const RecipeForm = ({ onSubmit, initialValue }: any) => {
+type Props = {
+  onSubmit: (recipe: RecipeProps) => void;
+  initialValue: RecipeProps;
+};
+
+type MethodProps = {
+  description: string;
+};
+
+type IngredientProps = {
+  name: string;
+};
+
+const RecipeForm = ({ onSubmit, initialValue }: Props) => {
   const { authUser } = useContext(LoginContext);
-  const [recipe, setRecipe] = useState<CreateRecipesProps>({
+  const [recipe, setRecipe] = useState<RecipeProps>({
     userId: authUser.id,
     categoryId: initialValue.categoryId || '',
     title: initialValue.title || '',
     imageUrl: initialValue.imageUrl || '',
-    servings: initialValue.servings || '',
-    prepTime: initialValue.prepTime || '',
-    cookingTime: initialValue.cookingTime || '',
+    servings: initialValue.servings || Number(0),
+    prepTime: initialValue.prepTime || Number(0),
+    cookingTime: initialValue.cookingTime || Number(0),
     description: initialValue.description || '',
     ingredients: initialValue.ingredients || [{ name: '' }, { name: '' }, { name: '' }],
     methods: initialValue.methods || [{ description: '' }, { description: '' }, { description: '' }, { description: '' }],
   });
 
-  const changeInputValue = (e: any) => {
+  const changeInputValue = (e: { target: { name: string; value: string } }) => {
     setRecipe({
       ...recipe,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleIngredientsInput = (index: number, e: any) => {
+  const handleIngredientsInput = (index: number, e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
     const list = [...recipe.ingredients];
     list[index][name] = value;
+    console.log(list);
 
     setRecipe({ ...recipe, ingredients: list });
   };
@@ -53,10 +68,12 @@ const RecipeForm = ({ onSubmit, initialValue }: any) => {
     setRecipe(list);
   };
 
-  const handleMethodsInput = (index: number, e: any) => {
+  const handleMethodsInput = (index: number, e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
     const list = [...recipe.methods];
     list[index][name] = value;
+
+    console.log(list);
     setRecipe({ ...recipe, methods: list });
   };
 
@@ -75,7 +92,7 @@ const RecipeForm = ({ onSubmit, initialValue }: any) => {
     queryFn: getCategories,
   });
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     onSubmit(recipe);
   };
@@ -103,7 +120,7 @@ const RecipeForm = ({ onSubmit, initialValue }: any) => {
                       onChange={changeInputValue}
                       fullWidth
                     >
-                      {categories.map((category: any) => (
+                      {categories.map((category: CategoriesProps) => (
                         <MenuItem key={category.id} value={category.id}>
                           {category.name}
                         </MenuItem>
@@ -192,7 +209,7 @@ const RecipeForm = ({ onSubmit, initialValue }: any) => {
                 Add Ingredient
               </Button>
               <div className={styles.ingredientsBox}>
-                {recipe.ingredients.map((ingredient: any, index: any) => (
+                {recipe.ingredients.map((ingredient: IngredientProps, index: number) => (
                   <Grid item xs={12} sm={5} md={3} lg={3} margin={1}>
                     <div key={index}>
                       <TextField
@@ -215,7 +232,7 @@ const RecipeForm = ({ onSubmit, initialValue }: any) => {
               </Button>
 
               <div className={styles.ingredientsBox}>
-                {recipe.methods.map((method: any, index: any) => (
+                {recipe.methods.map((method: MethodProps, index: number) => (
                   <Grid item xs={12} sm={12} margin={2}>
                     <div key={index}>
                       <TextField

@@ -14,7 +14,7 @@ export const getUser = async (id: number) => {
   return await axios.get(`${API_URL}/users/${id}`).then((res) => res.data);
 };
 
-export const updateUser = async ({ id, ...user }: any) => {
+export const updateUser = async ({ id, ...user }: UserProps) => {
   return await axios.put(`${API_URL}/users/${id}`, user);
 };
 

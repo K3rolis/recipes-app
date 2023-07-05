@@ -5,8 +5,14 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { LoginContext } from '../../Contexts/LoginContext';
 import { useParams } from 'react-router-dom';
+import { CommentProps } from '../../../types/comments';
 
-const CommentForm = ({ onSubmit, initialValue }: any) => {
+type props = {
+  onSubmit: (comment: CommentProps) => void;
+  initialValue: CommentProps;
+};
+
+const CommentForm = ({ onSubmit, initialValue }: props) => {
   const { authUser } = useContext(LoginContext);
   const today = new Date();
   const date = (today: Date) => {
@@ -22,16 +28,16 @@ const CommentForm = ({ onSubmit, initialValue }: any) => {
     recipeId: Number(recipeId),
   });
 
-  const changeInputValue = (e: any) => {
+  const changeInputValue = (e: { target: { name: string; value: string } }) => {
     setComment({
       ...comment,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    onSubmit(comment);
+    onSubmit(comment as CommentProps);
 
     setComment({
       ...comment,

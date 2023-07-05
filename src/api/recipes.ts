@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { API_URL } from '../configs/config';
+import { RecipeProps } from '../types/recipes';
 
-export const createRecipe = async (recipe: any) => {
+export const createRecipe = async (recipe: RecipeProps) => {
   return await axios.post(`${API_URL}/recipes/`, recipe);
 };
 
@@ -9,7 +10,7 @@ export const getRecipe = async (id: number) => {
   return await axios.get(`${API_URL}/recipes/${id}?&_expand=category`).then((res) => res.data);
 };
 
-export const updateRecipe = async ({ id, ...recipe }: any) => {
+export const updateRecipe = async ({ id, ...recipe }: RecipeProps) => {
   return await axios.put(`${API_URL}/recipes/${id}`, recipe);
 };
 

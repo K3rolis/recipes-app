@@ -1,7 +1,7 @@
-export type CreateRecipesProps = {
+export type RecipeProps = {
   id?: number;
   userId: number;
-  categoryId: number;
+  categoryId: string;
   title: string;
   imageUrl: string;
   servings: number;
@@ -10,4 +10,11 @@ export type CreateRecipesProps = {
   description: string;
   ingredients: any;
   methods: any;
+};
+
+export type RecipeMethodsProps = {
+  method: {
+    description: string;
+  };
+  index: number;
 };

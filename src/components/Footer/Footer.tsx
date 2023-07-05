@@ -5,14 +5,12 @@ import Container from '../Container/Container';
 import { BsGithub } from 'react-icons/bs';
 import { BsLinkedin } from 'react-icons/bs';
 
-type Props = {};
-
-const Footer = (props: Props) => {
+const Footer = () => {
   return (
     <div>
       <Container>
         <div className={styles.logoBox}>
-          <a href="https://github.com/K3rolis/typescript-e-commerce" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/K3rolis/recipes-app" target="_blank" rel="noopener noreferrer">
             <BsGithub className={styles.logo} />
           </a>
 
