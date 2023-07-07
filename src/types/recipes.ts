@@ -8,8 +8,8 @@ export type RecipeProps = {
   prepTime: number;
   cookingTime: number;
   description: string;
-  ingredients: any;
-  methods: any;
+  ingredients: { name: string }[];
+  methods: { description: string }[];
 };
 
 export type RecipeMethodsProps = {

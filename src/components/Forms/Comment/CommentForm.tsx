@@ -6,6 +6,10 @@ import Button from '@mui/material/Button';
 import { LoginContext } from '../../Contexts/LoginContext';
 import { useParams } from 'react-router-dom';
 import { CommentProps } from '../../../types/comments';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { CommentSchema } from '../../../Validations/Comment';
+import ErrorField from '../../Errors/ErrorField';
 
 type props = {
   onSubmit: (comment: CommentProps) => void;
@@ -21,6 +25,12 @@ const CommentForm = ({ onSubmit, initialValue }: props) => {
 
   const { recipeId } = useParams();
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(CommentSchema) });
+
   const [comment, setComment] = useState({
     userId: authUser.id,
     description: initialValue.description || '',
@@ -35,18 +45,20 @@ const CommentForm = ({ onSubmit, initialValue }: props) => {
     });
   };
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    onSubmit(comment as CommentProps);
+  const onCreateComment = async () => {
+    const isValid = await CommentSchema.isValid(comment);
 
-    setComment({
-      ...comment,
-      description: '',
-    });
+    if (isValid) {
+      onSubmit(comment as CommentProps);
+      setComment({
+        ...comment,
+        description: '',
+      });
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onCreateComment)}>
       <Box
         sx={{
           '& > :not(style)': { width: '100%', margin: 1 },
@@ -54,7 +66,7 @@ const CommentForm = ({ onSubmit, initialValue }: props) => {
       >
         <TextField
           id="body"
-          name="description"
+          {...register('description')}
           value={comment.description}
           onChange={changeInputValue}
           label="Comment"
@@ -63,6 +75,9 @@ const CommentForm = ({ onSubmit, initialValue }: props) => {
           maxRows={10}
           placeholder="Comment..."
         />
+
+        {errors.description && <ErrorField> {errors.description?.message}</ErrorField>}
+
         <Button variant="contained" type="submit">
           Submit
         </Button>

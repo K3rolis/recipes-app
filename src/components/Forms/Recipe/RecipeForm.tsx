@@ -13,18 +13,14 @@ import { FormControl, Grid, InputLabel } from '@mui/material';
 import styles from './RecipeForm.module.css';
 import { PropagateLoader } from 'react-spinners';
 import { CategoriesProps } from '../../../types/categories';
+import { useForm, useFieldArray } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { RecipeSchema } from '../../../Validations/Recipe';
+import ErrorField from '../../Errors/ErrorField';
 
 type Props = {
   onSubmit: (recipe: RecipeProps) => void;
   initialValue: RecipeProps;
-};
-
-type MethodProps = {
-  description: string;
-};
-
-type IngredientProps = {
-  name: string;
 };
 
 const RecipeForm = ({ onSubmit, initialValue }: Props) => {
@@ -34,13 +30,21 @@ const RecipeForm = ({ onSubmit, initialValue }: Props) => {
     categoryId: initialValue.categoryId || '',
     title: initialValue.title || '',
     imageUrl: initialValue.imageUrl || '',
-    servings: initialValue.servings || Number(0),
-    prepTime: initialValue.prepTime || Number(0),
-    cookingTime: initialValue.cookingTime || Number(0),
+    servings: initialValue.servings || Number(),
+    prepTime: initialValue.prepTime || Number(),
+    cookingTime: initialValue.cookingTime || Number(),
     description: initialValue.description || '',
-    ingredients: initialValue.ingredients || [{ name: '' }, { name: '' }, { name: '' }],
-    methods: initialValue.methods || [{ description: '' }, { description: '' }, { description: '' }, { description: '' }],
+    ingredients: initialValue.ingredients || [{ name: '' }],
+    methods: initialValue.methods || [{ description: '' }],
   });
+
+  const {
+    control,
+    getValues,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(RecipeSchema) });
 
   const changeInputValue = (e: { target: { name: string; value: string } }) => {
     setRecipe({
@@ -49,52 +53,36 @@ const RecipeForm = ({ onSubmit, initialValue }: Props) => {
     });
   };
 
-  const handleIngredientsInput = (index: number, e: { target: { name: string; value: string } }) => {
-    const { name, value } = e.target;
-    const list = [...recipe.ingredients];
-    list[index][name] = value;
-    console.log(list);
+  const {
+    fields: ingredientFields,
+    append: ingredientAppend,
+    remove: ingredientRemove,
+  } = useFieldArray({
+    name: 'ingredients',
+    control,
+  });
 
-    setRecipe({ ...recipe, ingredients: list });
-  };
-
-  const handleAddIngredient = () => {
-    setRecipe({ ...recipe, ingredients: [...recipe.ingredients, { name: '' }] });
-  };
-
-  const handleRemoveIngredient = (index: number) => {
-    const list = { ...recipe };
-    list.ingredients.splice(index, 1);
-    setRecipe(list);
-  };
-
-  const handleMethodsInput = (index: number, e: { target: { name: string; value: string } }) => {
-    const { name, value } = e.target;
-    const list = [...recipe.methods];
-    list[index][name] = value;
-
-    console.log(list);
-    setRecipe({ ...recipe, methods: list });
-  };
-
-  const handleAddMethod = () => {
-    setRecipe({ ...recipe, methods: [...recipe.methods, { description: '' }] });
-  };
-
-  const handleRemoveMethod = (index: number) => {
-    const list = { ...recipe };
-    list.methods.splice(index, 1);
-    setRecipe(list);
-  };
+  const {
+    fields: methodFields,
+    append: methodAppend,
+    remove: methodRemove,
+  } = useFieldArray({
+    name: 'methods',
+    control,
+  });
 
   const { isLoading, data: categories } = useQuery({
     queryKey: ['categories'],
     queryFn: getCategories,
   });
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    onSubmit(recipe);
+  const values = getValues();
+
+  const onCreateRecipe = async () => {
+    const isValid = await RecipeSchema.isValid(values);
+    if (isValid) {
+      onSubmit(recipe);
+    }
   };
 
   if (isLoading) return <PropagateLoader className="loader" color="#36d7b7" />;
@@ -102,7 +90,7 @@ const RecipeForm = ({ onSubmit, initialValue }: Props) => {
   return (
     <Container className={styles.formContainer}>
       <FormControl fullWidth>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onCreateRecipe)}>
           <Box sx={{ width: '100%' }}>
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
@@ -113,7 +101,7 @@ const RecipeForm = ({ onSubmit, initialValue }: Props) => {
                       label="Category"
                       labelId="categories"
                       id="categoryId"
-                      name="categoryId"
+                      {...register('categoryId')}
                       size="medium"
                       margin="dense"
                       value={recipe.categoryId}
@@ -126,6 +114,7 @@ const RecipeForm = ({ onSubmit, initialValue }: Props) => {
                         </MenuItem>
                       ))}
                     </Select>
+                    {errors.categoryId && <ErrorField>{errors.categoryId?.message}</ErrorField>}
                   </FormControl>
                 )}
               </Grid>
@@ -134,67 +123,75 @@ const RecipeForm = ({ onSubmit, initialValue }: Props) => {
                 <TextField
                   fullWidth
                   label="Title"
-                  name="title"
+                  {...register('title')}
                   variant="outlined"
                   margin="normal"
                   size="small"
                   value={recipe.title}
                   onChange={changeInputValue}
                 />
+                {errors.title && <ErrorField>{errors.title?.message}</ErrorField>}
               </Grid>
               <Grid item xs={12} md={12}>
                 <TextField
                   fullWidth
                   label="Image URL"
-                  name="imageUrl"
+                  {...register('imageUrl')}
                   variant="outlined"
                   margin="normal"
                   size="small"
                   value={recipe.imageUrl}
                   onChange={changeInputValue}
                 />
+                {errors.imageUrl && <ErrorField>{errors.imageUrl?.message}</ErrorField>}
               </Grid>
               <Grid item xs={12} sm={4}>
                 <TextField
                   fullWidth
                   label="Servings"
-                  name="servings"
+                  {...register('servings')}
+                  type="number"
                   variant="outlined"
                   margin="normal"
                   size="small"
                   value={recipe.servings}
                   onChange={changeInputValue}
                 />
+                {errors.servings && <ErrorField>{errors.servings?.message}</ErrorField>}
               </Grid>
               <Grid item xs={12} sm={4}>
                 <TextField
                   fullWidth
                   label="Prep Time"
-                  name="prepTime"
+                  {...register('prepTime')}
+                  type="number"
                   variant="outlined"
                   margin="normal"
                   size="small"
                   value={recipe.prepTime}
                   onChange={changeInputValue}
                 />
+                {errors.prepTime && <ErrorField>{errors.prepTime?.message}</ErrorField>}
               </Grid>
               <Grid item xs={12} sm={4}>
                 <TextField
                   fullWidth
                   label="Cooking Time"
-                  name="cookingTime"
+                  {...register('cookingTime')}
+                  type="number"
                   variant="outlined"
                   margin="normal"
                   size="small"
                   value={recipe.cookingTime}
                   onChange={changeInputValue}
                 />
+                {errors.cookingTime && <ErrorField>{errors.cookingTime?.message}</ErrorField>}
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   fullWidth
                   label="Description"
-                  name="description"
+                  {...register('description')}
                   variant="outlined"
                   margin="normal"
                   size="small"
@@ -204,59 +201,71 @@ const RecipeForm = ({ onSubmit, initialValue }: Props) => {
                   value={recipe.description}
                   onChange={changeInputValue}
                 />
+                {errors.description && <ErrorField>{errors.description?.message}</ErrorField>}
               </Grid>
-              <Button variant="contained" onClick={handleAddIngredient}>
-                Add Ingredient
-              </Button>
+
               <div className={styles.ingredientsBox}>
-                {recipe.ingredients.map((ingredient: IngredientProps, index: number) => (
-                  <Grid item xs={12} sm={5} md={3} lg={3} margin={1}>
-                    <div key={index}>
+                {ingredientFields.map((field, index) => {
+                  return (
+                    <Grid item xs={12} sm={5} md={3} lg={3} margin={1} key={field.id}>
                       <TextField
                         fullWidth
-                        name="name"
+                        {...register(`ingredients.${index}.name` as const)}
                         label="New Ingredient"
                         margin="dense"
                         size="small"
-                        value={ingredient.name}
-                        onChange={(e) => handleIngredientsInput(index, e)}
+                        onChange={() => setRecipe({ ...recipe, ingredients: values.ingredients } as RecipeProps)}
                       />
-                      <Button onClick={() => handleRemoveIngredient(index)}>Remove Ingredient</Button>
-                    </div>
-                  </Grid>
-                ))}
-              </div>
+                      {errors.ingredients && <ErrorField>{errors.ingredients[index]?.name?.message}</ErrorField>}
 
-              <Button variant="contained" onClick={handleAddMethod}>
-                Add method
+                      {index > 0 && (
+                        <Button type="button" onClick={() => ingredientRemove(index)}>
+                          remove ingredient
+                        </Button>
+                      )}
+                    </Grid>
+                  );
+                })}
+              </div>
+              <Button type="button" variant="contained" color="secondary" style={{ marginLeft: '14px' }} onClick={() => ingredientAppend({ name: '' })}>
+                Add Ingredient
               </Button>
 
               <div className={styles.ingredientsBox}>
-                {recipe.methods.map((method: MethodProps, index: number) => (
-                  <Grid item xs={12} sm={12} margin={2}>
-                    <div key={index}>
+                {methodFields.map((field, index) => {
+                  return (
+                    <Grid item xs={12} sm={12} margin={2} key={field.id}>
                       <TextField
                         fullWidth
-                        name="description"
+                        {...register(`methods.${index}.description` as const)}
                         label="New Method"
                         margin="dense"
                         size="small"
                         multiline
                         minRows={3}
                         maxRows={8}
-                        value={method.description}
-                        onChange={(e) => handleMethodsInput(index, e)}
+                        onChange={() => setRecipe({ ...recipe, methods: values.methods } as RecipeProps)}
                       />
-                      <Button onClick={() => handleRemoveMethod(index)}>Delete step</Button>
-                    </div>
-                  </Grid>
-                ))}
-              </div>
 
-              <Button variant="contained" type="submit">
-                Submit
+                      {errors.methods && <ErrorField>{errors.methods[index]?.description?.message}</ErrorField>}
+
+                      {index > 0 && (
+                        <Button type="button" onClick={() => methodRemove(index)}>
+                          remove method
+                        </Button>
+                      )}
+                    </Grid>
+                  );
+                })}
+              </div>
+              <Button variant="contained" color="secondary" style={{ marginLeft: '14px' }} onClick={() => methodAppend({ description: '' })}>
+                Add method
               </Button>
             </Grid>
+
+            <Button variant="contained" style={{ marginTop: '20px' }} type="submit">
+              Submit
+            </Button>
           </Box>
         </form>
       </FormControl>

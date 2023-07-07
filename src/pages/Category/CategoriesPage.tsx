@@ -49,7 +49,7 @@ const CategoriesPage = () => {
     },
   });
 
-  const handleSubmit = (category: CategoriesProps) => {
+  const handleSubmit = async (category: CategoriesProps) => {
     if (editForm) {
       updateCategoryMutation.mutate({
         id: editForm.id,

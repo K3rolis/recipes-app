@@ -1,8 +1,9 @@
 .ingredientsBox {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* padding: 10px; */
+  margin-left: 14px;
   /* gap: 10px; */
   margin-block: 10px;
 
