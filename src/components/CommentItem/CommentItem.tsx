@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './CommentItem.module.css';
 
 import Button from 'react-bootstrap/Button';
+import { CommentProps } from '../../types/comments';
+import { LoginContext } from '../Contexts/LoginContext';
 
-const CommentItem = ({ handleEdit, handleDelete, ...props }: any) => {
+type Comment = {
+  handleEdit: (props: CommentProps) => void;
+  handleDelete: (id: number) => void;
+  props: CommentProps;
+};
+
+const CommentItem = ({ handleEdit, handleDelete, props }: Comment) => {
+  const { authUser } = useContext(LoginContext);
   return (
     <div className={styles.commentBox}>
       <div className={styles.commentHeader}>
         <div className={styles.metaData}>
-          <div className={styles.name}>{props.userName}</div>
+          <div className={styles.name}>{props.user.username}</div>
           <div className={styles.date}>{props.postedDate}</div>
         </div>
         <div className={styles.buttons}>
-          {props.showActions ? (
+          {props.userId === authUser.id ? (
             <>
               <Button variant="outline-dark" onClick={() => handleEdit(props)}>
                 Edit

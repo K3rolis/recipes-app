@@ -10,12 +10,14 @@ import { getRecipe } from '../../api/recipes';
 import SingleRecipe from '../../components/SingleRecipe/SingleRecipe';
 import Button from 'react-bootstrap/Button';
 import { PropagateLoader } from 'react-spinners';
+import { toast } from 'react-toastify';
+import { CommentProps } from '../../types/comments';
 
 const SingleRecipePage = () => {
-  const { isLoggedIn, authUser } = useContext(LoginContext);
+  const { isLoggedIn } = useContext(LoginContext);
   const { recipeId } = useParams();
   const [openComment, setOpenComment] = useState<boolean>(false);
-  const [editForm, setEditForm] = useState<any | null>(null);
+  const [editForm, setEditForm] = useState<CommentProps | null>(null);
 
   const {
     refetch,
@@ -33,22 +35,40 @@ const SingleRecipePage = () => {
 
   const createCommentMutation = useMutation({
     mutationFn: createComment,
-    onSuccess: () => refetch(),
+    onSuccess: () => {
+      refetch();
+      toast.success('New comment added');
+    },
+    onError: () => {
+      toast.error('Server issues, please try again later');
+    },
   });
 
   const deleteCommentMutation = useMutation({
     mutationFn: deleteComment,
-    onSuccess: () => refetch(),
+    onSuccess: () => {
+      refetch();
+      toast.success('Comment deleted');
+    },
+    onError: () => {
+      toast.error('Server issues, please try again later');
+    },
   });
 
   const updateCommentMutation = useMutation({
     mutationFn: updateComment,
-    onSuccess: () => refetch(),
+    onSuccess: () => {
+      refetch();
+      toast.success('Comment updated');
+    },
+    onError: () => {
+      toast.error('Server issues, please try again later');
+    },
   });
 
-  const handleNewComment = (comment: any) => {
+  const handleNewComment = (comment: CommentProps) => {
     if (editForm) {
-      updateCommentMutation.mutate({ id: editForm.id, ...comment });
+      updateCommentMutation.mutate({ ...comment, id: editForm.id } as CommentProps);
     } else {
       createCommentMutation.mutate(comment);
     }
@@ -56,12 +76,12 @@ const SingleRecipePage = () => {
     setEditForm(null);
   };
 
-  const handleEdit = (comment: any) => {
+  const handleEdit = (comment: CommentProps) => {
     setEditForm(comment);
     setOpenComment(false);
   };
 
-  const handleDelete = (id: any) => {
+  const handleDelete = (id: number) => {
     deleteCommentMutation.mutate(id);
   };
 
@@ -80,17 +100,12 @@ const SingleRecipePage = () => {
           </Button>
         )}
 
-        {isLoggedIn && openComment && <CommentForm onSubmit={handleNewComment} initialValue={{}} />}
-        {comments?.map((comment: any) => (
+        {isLoggedIn && openComment && <CommentForm onSubmit={handleNewComment} initialValue={{} as CommentProps} />}
+        {comments?.map((comment: CommentProps) => (
           <>
-            <CommentItem
-              {...comment}
-              userName={comment.user.username}
-              showActions={(isLoggedIn && comment.userId === authUser.id) || false}
-              handleEdit={handleEdit}
-              handleDelete={handleDelete}
-            />
-            {isLoggedIn && editForm?.id === comment.id && <CommentForm onSubmit={handleNewComment} initialValue={editForm} />}
+            <CommentItem props={{ ...comment }} handleEdit={handleEdit} handleDelete={handleDelete} />
+            {console.log({ ...comment })}
+            {isLoggedIn && editForm?.id === comment.id && <CommentForm onSubmit={handleNewComment} initialValue={editForm as CommentProps} />}
           </>
         ))}
       </Container>

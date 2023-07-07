@@ -12,7 +12,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 import CategoryForm from '../../components/Forms/Category/CategoryForm';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { createCategory, deleteCategory, getCategories, updateCategory } from '../../api/categories';
 import { CategoriesProps } from '../../types/categories';
 import { PropagateLoader } from 'react-spinners';
@@ -21,7 +21,7 @@ import { LoginContext } from '../../components/Contexts/LoginContext';
 
 const CategoriesPage = () => {
   const [isCreate, setIsCreate] = useState(false);
-  const [editForm, setEditForm] = useState<any | null>(null);
+  const [editForm, setEditForm] = useState<CategoriesProps | null>(null);
   const { isLoggedIn } = useContext(LoginContext);
 
   const {
@@ -49,7 +49,7 @@ const CategoriesPage = () => {
     },
   });
 
-  const handleSubmit = (category: any) => {
+  const handleSubmit = async (category: CategoriesProps) => {
     if (editForm) {
       updateCategoryMutation.mutate({
         id: editForm.id,
@@ -85,7 +85,7 @@ const CategoriesPage = () => {
             )}
           </div>
 
-          {isCreate && <CategoryForm onSubmit={handleSubmit} title={'New Category'} submit={'Create'} initialValue={{}} />}
+          {isCreate && <CategoryForm onSubmit={handleSubmit} title={'New Category'} submit={'Create'} initialValue={{} as CategoriesProps} />}
           {editForm && <CategoryForm title={'Edit'} submit={'Submit'} onSubmit={handleSubmit} initialValue={editForm} />}
 
           <TableContainer component={Paper}>

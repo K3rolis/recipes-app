@@ -9,9 +9,15 @@ import { useMutation } from '@tanstack/react-query';
 import { deleteUser } from '../../../api/users';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { UserProps } from '../../../types/users';
 
-const EditUserForm = ({ onSubmit, initialValue }: any) => {
-  const [user, setUser] = useState<any>({
+type Props = {
+  onSubmit: (user: UserProps) => void;
+  initialValue: UserProps;
+};
+
+const EditUserForm = ({ onSubmit, initialValue }: Props) => {
+  const [user, setUser] = useState({
     email: initialValue.email || '',
     password: '',
     confirmPassword: '',
@@ -22,7 +28,7 @@ const EditUserForm = ({ onSubmit, initialValue }: any) => {
   const navigate = useNavigate();
   const { userId } = useParams();
 
-  const handleChangeInput = (e: any) => {
+  const handleChangeInput = (e: { target: { name: string; value: string } }) => {
     setUser({
       ...user,
       [e.target.name]: e.target.value,
@@ -45,7 +51,7 @@ const EditUserForm = ({ onSubmit, initialValue }: any) => {
     } else if (user.password === '') {
       setError(`Your password can't be empty`);
     } else {
-      onSubmit(user);
+      onSubmit(user as UserProps);
       setError('');
     }
 
