@@ -1,3 +1,10 @@
+1. Download this project: ```git clone https://github.com/K3rolis/recipes-app.git``` or ``` download zip and extract ```
+2. Open this project using VSC.
+3. In terminal write these commands:
+   a) ```npm i ```
+   b) ```json-server --watch db.json```
+   c) ```npm start```
+
 ![recipe1](https://github.com/K3rolis/recipes-app/assets/47807459/b649edbe-67c3-4d07-9cdc-f42a85f11119)
 ![recipe2](https://github.com/K3rolis/recipes-app/assets/47807459/9bc88b8c-3596-4bbb-bd83-a27f7f124652)
 ![recipe3](https://github.com/K3rolis/recipes-app/assets/47807459/4a52a2dc-3ee0-455d-bce9-27e823dde37a)
