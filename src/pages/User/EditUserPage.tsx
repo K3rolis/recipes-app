@@ -1,18 +1,16 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import EditUserForm from '../../components/Forms/User/EditUserForm';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getUser, updateUser } from '../../api/users';
-import Container from '../../components/Container/Container';
 import { LoginContext } from '../../components/Contexts/LoginContext';
 import { PropagateLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
+import { UserProps } from '../../types/users';
 
-type Props = {};
-
-const EditUserPage = (props: Props) => {
+const EditUserPage = () => {
   const { userId } = useParams();
-  const { authUser } = useContext(LoginContext);
+  const { auth } = useContext(LoginContext);
   const navigate = useNavigate();
 
   const { isLoading, data: user } = useQuery({
@@ -28,11 +26,11 @@ const EditUserPage = (props: Props) => {
     },
   });
 
-  const handleSubmit = (user: any) => {
+  const handleSubmit = (user: UserProps) => {
     if (user.password === user.confirmPassword) {
       updateUserMutation.mutate({
         id: Number(userId),
-        username: authUser.name,
+        username: auth.username,
         email: user.email,
         password: user.password,
       });

@@ -5,6 +5,7 @@ import { getRecipe, updateRecipe } from '../../../api/recipes';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PropagateLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
+import { RecipeProps } from '../../../types/recipes';
 
 const RecipeEdit = () => {
   const { recipeId } = useParams();
@@ -26,7 +27,7 @@ const RecipeEdit = () => {
 
   if (isLoading || updateRecipeMutation.isLoading) return <PropagateLoader className="loader" color="#36d7b7" />;
 
-  const handleSubmit = (recipe: any) => {
+  const handleSubmit = (recipe: RecipeProps) => {
     console.log(recipe);
     updateRecipeMutation.mutate({
       id: Number(recipeId),

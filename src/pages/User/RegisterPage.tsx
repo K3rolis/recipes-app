@@ -8,7 +8,7 @@ import { PropagateLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
 
 const RegisterPage = () => {
-  const [error, setError] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const createUserMutation = useMutation({

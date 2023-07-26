@@ -19,9 +19,19 @@ type Props = {
   prepTime: number;
   cookingTime: number;
   description: string;
-  ingredients: any;
-  methods: any;
-  category: any;
+  ingredients: IngredientProps[];
+  methods: MethodProps[];
+  category: {
+    name: string;
+  };
+};
+
+type MethodProps = {
+  description: string;
+};
+
+type IngredientProps = {
+  name: string;
 };
 
 const SingleRecipe = (props: Props) => {
@@ -82,7 +92,7 @@ const SingleRecipe = (props: Props) => {
           <div className={styles.instructionsTitle}>Ingredients</div>
           <ul>
             {props.ingredients &&
-              props.ingredients.map((ingredient: any, index: number) => (
+              props.ingredients.map((ingredient: IngredientProps, index: number) => (
                 <li key={index} className={styles.recipeIngredient}>
                   {ingredient.name}
                 </li>
@@ -94,7 +104,7 @@ const SingleRecipe = (props: Props) => {
           <div className={styles.instructions}>
             <ol>
               {props.methods &&
-                props.methods.map((method: any, index: number) => (
+                props.methods.map((method: MethodProps, index: number) => (
                   <li key={index} className={styles.method}>
                     {method.description}
                   </li>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styles from './UserForm.module.css';
 import Container from '../../Container/Container';
 
@@ -10,6 +10,7 @@ import { deleteUser } from '../../../api/users';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { UserProps } from '../../../types/users';
+import { LoginContext } from '../../Contexts/LoginContext';
 
 type Props = {
   onSubmit: (user: UserProps) => void;
@@ -18,12 +19,14 @@ type Props = {
 
 const EditUserForm = ({ onSubmit, initialValue }: Props) => {
   const [user, setUser] = useState({
+    id: initialValue.id || null,
     email: initialValue.email || '',
     password: '',
     confirmPassword: '',
   });
 
   const [error, setError] = useState<string>('');
+  const { auth, setAuth } = useContext(LoginContext);
 
   const navigate = useNavigate();
   const { userId } = useParams();
@@ -39,6 +42,13 @@ const EditUserForm = ({ onSubmit, initialValue }: Props) => {
     mutationFn: deleteUser,
     onSuccess: () => {
       toast.success('Your Account Was  Deleted.');
+      if (Number(userId) === auth.id) {
+        setAuth({
+          id: null,
+          username: '',
+          isLoggedIn: false,
+        });
+      }
       navigate(`/`);
     },
   });
@@ -56,6 +66,7 @@ const EditUserForm = ({ onSubmit, initialValue }: Props) => {
     }
 
     setUser({
+      id: auth.id,
       email: user.email,
       password: '',
       confirmPassword: '',

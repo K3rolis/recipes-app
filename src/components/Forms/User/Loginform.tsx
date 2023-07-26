@@ -11,7 +11,7 @@ import { PropagateLoader } from 'react-spinners';
 import { UserLoginProps, UserProps } from '../../../types/users';
 
 type Props = {
-  onSubmit: (users: UserProps, user: UserLoginProps) => void;
+  onSubmit: (users: UserProps[], user: UserLoginProps) => void;
 };
 
 const LoginForm = ({ onSubmit }: Props) => {

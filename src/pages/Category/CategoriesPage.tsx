@@ -22,7 +22,7 @@ import { LoginContext } from '../../components/Contexts/LoginContext';
 const CategoriesPage = () => {
   const [isCreate, setIsCreate] = useState(false);
   const [editForm, setEditForm] = useState<CategoriesProps | null>(null);
-  const { isLoggedIn } = useContext(LoginContext);
+  const { auth } = useContext(LoginContext);
 
   const {
     refetch,
@@ -78,7 +78,7 @@ const CategoriesPage = () => {
       <Container>
         <div className={styles.item}>
           <div className={styles.linkBox}>
-            {isLoggedIn && (
+            {auth.isLoggedIn && (
               <Button className={styles.linkButton} variant="outline-primary" onClick={() => [setIsCreate(!isCreate), setEditForm(null)]}>
                 New Category
               </Button>

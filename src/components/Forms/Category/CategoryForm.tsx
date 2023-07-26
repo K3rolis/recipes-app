@@ -36,7 +36,7 @@ const CategoryForm = ({ onSubmit, initialValue, title, submit }: CategoryProps) 
     });
   };
 
-  const onCreateCategory = async (data: any) => {
+  const onCreateCategory = async (data: CategoriesProps) => {
     const isValid = await categorySchema.isValid(category);
 
     if (isValid) {

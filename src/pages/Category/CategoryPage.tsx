@@ -14,14 +14,14 @@ const RecipesPage = () => {
     queryKey: ['categories'],
     queryFn: getCategories,
   });
-  const { isLoggedIn } = useContext(LoginContext);
+  const { auth } = useContext(LoginContext);
 
   return (
     <div>
       <Container>
         <div className={styles.sectionTitle}>Explore</div>
         <div style={{ textAlign: 'right', margin: 2 }}>
-          {isLoggedIn && (
+          {auth.isLoggedIn && (
             <Link to="/recipes/create/">
               <Button variant="outline-secondary">New Recipe</Button>
             </Link>

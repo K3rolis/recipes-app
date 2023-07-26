@@ -1,6 +1,6 @@
 export type CategoriesProps = {
-  id?: any;
-  name: any;
+  id?: number;
+  name: string;
   imageUrl: string;
 };
 
