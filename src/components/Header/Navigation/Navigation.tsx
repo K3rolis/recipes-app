@@ -1,17 +1,19 @@
 import React, { useContext } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styles from './Navigation.module.css';
 import Container from '../../Container/Container';
 import { LoginContext } from '../../Contexts/LoginContext';
-import { Button } from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 const Navigation = () => {
-  const { isLoggedIn, setIsLoggedIn, authUser, setAuthUser } = useContext(LoginContext);
+  const { auth, setAuth } = useContext(LoginContext);
 
   const handleLogout = () => {
-    setIsLoggedIn(false);
-    setAuthUser(null);
+    setAuth({
+      isLoggedIn: false,
+      username: '',
+      id: null,
+    });
   };
 
   return (
@@ -30,9 +32,9 @@ const Navigation = () => {
 
         <Dropdown>
           <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
-            {isLoggedIn ? `Sveiki, ${authUser.name}` : 'Login / Register'}
+            {auth.isLoggedIn ? `Sveiki, ${auth.username}` : 'Login / Register'}
           </Dropdown.Toggle>
-          {!isLoggedIn ? (
+          {!auth.isLoggedIn ? (
             <Dropdown.Menu>
               <NavLink className={({ isActive }) => (isActive ? styles.active : 'active')} to="/login/">
                 Login
@@ -47,7 +49,7 @@ const Navigation = () => {
                 <div className={styles.logoutButton} onClick={handleLogout}>
                   Atsijungti
                 </div>
-                <NavLink className={({ isActive }) => (isActive ? styles.active : 'active')} to={`/user/edit/${authUser.id}`}>
+                <NavLink className={({ isActive }) => (isActive ? styles.active : 'active')} to={`/user/edit/${auth.id}`}>
                   Edit
                 </NavLink>
               </div>

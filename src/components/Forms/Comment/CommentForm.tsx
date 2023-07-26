@@ -17,7 +17,7 @@ type props = {
 };
 
 const CommentForm = ({ onSubmit, initialValue }: props) => {
-  const { authUser } = useContext(LoginContext);
+  const { auth } = useContext(LoginContext);
   const today = new Date();
   const date = (today: Date) => {
     return today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -32,7 +32,7 @@ const CommentForm = ({ onSubmit, initialValue }: props) => {
   } = useForm({ resolver: yupResolver(CommentSchema) });
 
   const [comment, setComment] = useState({
-    userId: authUser.id,
+    userId: auth.id,
     description: initialValue.description || '',
     postedDate: date(today),
     recipeId: Number(recipeId),

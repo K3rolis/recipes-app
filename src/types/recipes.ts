@@ -1,6 +1,6 @@
 export type RecipeProps = {
   id?: number;
-  userId: number;
+  userId: number | null;
   categoryId: string;
   title: string;
   imageUrl: string;

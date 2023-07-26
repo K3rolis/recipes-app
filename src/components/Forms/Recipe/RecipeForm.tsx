@@ -24,9 +24,9 @@ type Props = {
 };
 
 const RecipeForm = ({ onSubmit, initialValue }: Props) => {
-  const { authUser } = useContext(LoginContext);
+  const { auth } = useContext(LoginContext);
   const [recipe, setRecipe] = useState<RecipeProps>({
-    userId: authUser.id,
+    userId: auth.id,
     categoryId: initialValue.categoryId || '',
     title: initialValue.title || '',
     imageUrl: initialValue.imageUrl || '',

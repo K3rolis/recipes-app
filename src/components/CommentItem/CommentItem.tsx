@@ -12,7 +12,7 @@ type Comment = {
 };
 
 const CommentItem = ({ handleEdit, handleDelete, props }: Comment) => {
-  const { authUser } = useContext(LoginContext);
+  const { auth } = useContext(LoginContext);
   return (
     <div className={styles.commentBox}>
       <div className={styles.commentHeader}>
@@ -21,7 +21,7 @@ const CommentItem = ({ handleEdit, handleDelete, props }: Comment) => {
           <div className={styles.date}>{props.postedDate}</div>
         </div>
         <div className={styles.buttons}>
-          {props.userId === authUser.id ? (
+          {props.userId === auth.id ? (
             <>
               <Button variant="outline-dark" onClick={() => handleEdit(props)}>
                 Edit

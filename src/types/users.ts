@@ -1,5 +1,5 @@
 export type UserProps = {
-  id?: number;
+  id?: number | null;
   username: string;
   email: string;
   password: string;
@@ -7,7 +7,7 @@ export type UserProps = {
 };
 
 export type UserLoginProps = {
-  id?: number;
+  id?: number | null;
   username: string;
   password: string;
 };

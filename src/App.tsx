@@ -17,37 +17,29 @@ import Footer from './components/Footer/Footer';
 import NotFound from './components/Errors/NotFound';
 
 function App() {
-  const [authUser, setAuthUser] = useState<any | null>({
-    name: '',
-    id: null,
-  });
-  const [isLoggedIn, setIsLoggedIn] = useState<any | null>(false);
-
   return (
     <div className="App">
-      <LoginContext.Provider value={{ authUser, setAuthUser, isLoggedIn, setIsLoggedIn }}>
-        <Header />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          {/* <Route path="/recipes/" element={<RecipesPage />} /> */}
-          <Route path="/recipes/" element={<CategoryPage />} />
-          <Route path="/recipes/create/" element={<RecipeCreate />} />
-          <Route path="/recipes/edit/:recipeId" element={<RecipeEdit />} />
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        {/* <Route path="/recipes/" element={<RecipesPage />} /> */}
+        <Route path="/recipes/" element={<CategoryPage />} />
+        <Route path="/recipes/create/" element={<RecipeCreate />} />
+        <Route path="/recipes/edit/:recipeId" element={<RecipeEdit />} />
 
-          <Route path="/recipes/category/:categoryId" element={<RecipesPage />} />
-          <Route path="/recipes/category/:categoryId/recipe/:recipeId" element={<SingleRecipePage />} />
+        <Route path="/recipes/category/:categoryId" element={<RecipesPage />} />
+        <Route path="/recipes/category/:categoryId/recipe/:recipeId" element={<SingleRecipePage />} />
 
-          <Route path="/categories/" element={<CategoriesPage />} />
-          <Route path="/categories/create" element={<CategoriesPage />} />
+        <Route path="/categories/" element={<CategoriesPage />} />
+        <Route path="/categories/create" element={<CategoriesPage />} />
 
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/user/edit/:userId" element={<EditUserPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/user/edit/:userId" element={<EditUserPage />} />
 
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Footer />
-      </LoginContext.Provider>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Footer />
       <ToastContainer />
     </div>
   );

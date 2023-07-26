@@ -6,18 +6,25 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { RecipeProps } from '../../../types/recipes';
 
+type CategoryProps = {
+  data: {
+    categoryId: number;
+    id: number;
+  };
+};
+
 const RecipeCreate = () => {
   const navigate = useNavigate();
   const createRecipeMutation = useMutation({
     mutationFn: createRecipe,
-    onSuccess: (data: any) => {
+    onSuccess: (data: CategoryProps) => {
       toast.success('Recipe was created Successfully!');
       navigate(`/recipes/category/${data.data.categoryId}/recipe/${Number(data.data.id)}`);
     },
     onError: () => navigate(`/notFound`),
   });
 
-  const handleSubmit = (recipe: any) => {
+  const handleSubmit = (recipe: RecipeProps) => {
     createRecipeMutation.mutate({
       ...recipe,
       servings: Number(recipe.servings),

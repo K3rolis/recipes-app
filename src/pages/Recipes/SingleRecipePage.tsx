@@ -14,7 +14,7 @@ import { toast } from 'react-toastify';
 import { CommentProps } from '../../types/comments';
 
 const SingleRecipePage = () => {
-  const { isLoggedIn } = useContext(LoginContext);
+  const { auth } = useContext(LoginContext);
   const { recipeId } = useParams();
   const [openComment, setOpenComment] = useState<boolean>(false);
   const [editForm, setEditForm] = useState<CommentProps | null>(null);
@@ -94,18 +94,18 @@ const SingleRecipePage = () => {
 
         <h2>Comments {`(${comments.length})`}</h2>
 
-        {isLoggedIn && (
+        {auth.isLoggedIn && (
           <Button style={{ margin: 8 }} onClick={() => [setOpenComment(!openComment), setEditForm(null)]}>
             New Comment
           </Button>
         )}
 
-        {isLoggedIn && openComment && <CommentForm onSubmit={handleNewComment} initialValue={{} as CommentProps} />}
+        {auth.isLoggedIn && openComment && <CommentForm onSubmit={handleNewComment} initialValue={{} as CommentProps} />}
         {comments?.map((comment: CommentProps) => (
           <>
             <CommentItem props={{ ...comment }} handleEdit={handleEdit} handleDelete={handleDelete} />
             {console.log({ ...comment })}
-            {isLoggedIn && editForm?.id === comment.id && <CommentForm onSubmit={handleNewComment} initialValue={editForm as CommentProps} />}
+            {auth.isLoggedIn && editForm?.id === comment.id && <CommentForm onSubmit={handleNewComment} initialValue={editForm as CommentProps} />}
           </>
         ))}
       </Container>
